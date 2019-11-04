@@ -14,10 +14,15 @@ public class Main {
             {"_", "_", "_"}};
 
         String[][] lauta2 = new String[][]{
-            {"X", "O", "X","O"},
-            {"X", "_", "_","O"},
-            {"_", "X", "_","X"},
-            {"O", "_", "_","O"}};
+            {"_", "_", "X"},
+            {"_", "_", "O"},
+            {"X", "_", "O"}};
+        
+        String[][] lauta3 = new String[][]{
+            {"X", "O", "X", "O"},
+            {"X", "_", "_", "O"},
+            {"_", "X", "_", "X"},
+            {"O", "_", "_", "O"}};
 
         System.out.println(minimax.parasLiike(lauta, "X"));
         System.out.println(minimax.parasLiike(lauta, "O"));

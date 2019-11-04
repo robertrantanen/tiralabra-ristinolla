@@ -99,7 +99,7 @@ public class minimax {
         }
 
         if (maksimoija) {
-            int paras = -999;
+            int paras = -100;
 
             for (int i = 0; i < lauta.length; i++) {
                 for (int j = 0; j < lauta.length; j++) {
@@ -114,9 +114,9 @@ public class minimax {
                     }
                 }
             }
-            return paras;
+            return paras - syvyys;
         } else {
-            int paras = 999;
+            int paras = 100;
 
             for (int i = 0; i < lauta.length; i++) {
                 for (int j = 0; j < lauta.length; j++) {
@@ -131,7 +131,7 @@ public class minimax {
                     }
                 }
             }
-            return paras;
+            return paras + syvyys;
         }
 
     }
