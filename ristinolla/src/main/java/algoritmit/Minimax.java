@@ -1,10 +1,10 @@
 package algoritmit;
 
-public class minimax {
+public class Minimax {
 
-    public int evaluoiTulos(String[][] lauta) {
+    public int laudanTulos(String[][] lauta) {
 
-        boolean tarkistaja = true;
+        boolean tarkistaja;
 
         for (int rivi = 0; rivi < lauta.length; rivi++) {
             tarkistaja = true;
@@ -18,7 +18,7 @@ public class minimax {
                     return 1;
                 } else if (lauta[rivi][0].equals("O")) {
                     return -1;
-                }
+                } 
             }
         }
 
@@ -34,42 +34,39 @@ public class minimax {
                     return 1;
                 } else if (lauta[0][sarake].equals("O")) {
                     return -1;
-                }
+                } 
             }
         }
 
-        for (int rivi = 0; rivi < lauta.length - 1; rivi++) {
-            tarkistaja = true;
-            for (int sarake = 0; sarake < lauta.length - 1; sarake++) {
-                if (!(lauta[rivi][sarake].equals(lauta[rivi + 1][sarake + 1]))) {
-                    tarkistaja = false;
-                }
-
-            }
-            if (tarkistaja) {
-                if (lauta[0][0].equals("X")) {
-                    return 1;
-                } else if (lauta[0][0].equals("O")) {
-                    return -1;
-                }
+        tarkistaja = true;
+        for (int i = 0; i < lauta.length - 1; i++) {
+            if (!(lauta[i][i].equals(lauta[i + 1][i + 1]))) {
+                tarkistaja = false;
             }
         }
+        if (tarkistaja) {
+            if (lauta[0][0].equals("X")) {
+                return 1;
+            } else if (lauta[0][0].equals("O")) {
+                return -1;
+            } 
+        }
 
+        tarkistaja = true;
+        int sarake = 0;
         for (int rivi = lauta.length - 1; rivi > 0; rivi--) {
-            tarkistaja = true;
-            for (int sarake = 0; sarake < lauta.length - 1; sarake++) {
-                if (!(lauta[rivi][sarake].equals(lauta[rivi - 1][sarake + 1]))) {
-                    tarkistaja = false;
-                }
+            if (!(lauta[rivi][sarake].equals(lauta[rivi - 1][sarake + 1]))) {
+                tarkistaja = false;
+            }
+            sarake++;
+        }
 
-            }
-            if (tarkistaja) {
-                if (lauta[lauta.length - 1][0].equals("X")) {
-                    return 1;
-                } else if (lauta[lauta.length - 1][0].equals("O")) {
-                    return -1;
-                }
-            }
+        if (tarkistaja) {
+            if (lauta[lauta.length - 1][0].equals("X")) {
+                return 1;
+            } else if (lauta[lauta.length - 1][0].equals("O")) {
+                return -1;
+            } 
         }
 
         return 0;
@@ -88,7 +85,7 @@ public class minimax {
 
     public int minimax(String[][] lauta, int syvyys, boolean maksimoija) {
 
-        int arvo = evaluoiTulos(lauta);
+        int arvo = laudanTulos(lauta);
 
         if (arvo == 1 || arvo == -1) {
             return arvo;

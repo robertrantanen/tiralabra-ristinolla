@@ -1,12 +1,16 @@
 package main;
 
-import algoritmit.minimax;
+import algoritmit.Minimax;
+import pelilauta.Pelilauta;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        minimax minimax = new minimax();
+        Minimax minimax = new Minimax();
+        Pelilauta pelilauta = new Pelilauta(3);
+
+        
 
         String[][] lauta = new String[][]{
             {"X", "O", "X"},
@@ -14,19 +18,23 @@ public class Main {
             {"_", "_", "_"}};
 
         String[][] lauta2 = new String[][]{
-            {"_", "_", "X"},
-            {"_", "_", "O"},
-            {"X", "_", "O"}};
+            {"X", "_", "X"},
+            {"_", "O", "_"},
+            {"O", "_", "_"}};
         
         String[][] lauta3 = new String[][]{
             {"X", "O", "X", "O"},
             {"X", "_", "_", "O"},
             {"_", "X", "_", "X"},
             {"O", "_", "_", "O"}};
-
+        
+        /*
         System.out.println(minimax.parasLiike(lauta, "X"));
         System.out.println(minimax.parasLiike(lauta, "O"));
         System.out.println(minimax.parasLiike(lauta2, "X"));
+        pelilauta.tulostaLauta();
+        */
+        pelilauta.ihminenVsAi();
     }
 
 }

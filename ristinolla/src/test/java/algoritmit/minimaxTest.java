@@ -10,14 +10,14 @@ import static org.junit.Assert.*;
 public class minimaxTest {
 
     private String[][] lauta;
-    private minimax minimax;
+    private Minimax minimax;
 
     public minimaxTest() {
         lauta = new String[][]{
             {"X", "O", "X"},
             {"O", "O", "X"},
             {"_", "_", "_"}};
-        minimax = new minimax();
+        minimax = new Minimax();
     }
 
     @BeforeClass
