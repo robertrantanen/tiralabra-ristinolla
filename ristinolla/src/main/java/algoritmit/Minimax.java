@@ -1,7 +1,17 @@
 package algoritmit;
 
+/**
+ * Luokka minimax-algoritmin toteutukseen
+ */
 public class Minimax {
 
+    /**
+     * Metodi käy läpi pelilaudan ja tarkistaa, onko peli päätynyt jommankumman voittoon.
+     * 
+     * @param lauta kaksiulotteinen taulukko eli pelilauta
+     * @return 1 jos "X" voittaa, -1 jos "O" voittaa, muuten 0
+     *  
+     */
     public int laudanTulos(String[][] lauta) {
 
         boolean tarkistaja;
@@ -71,7 +81,13 @@ public class Minimax {
 
         return 0;
     }
-
+    
+    /**
+     * Metodi käy pelilaudan läpi ja tarkistaa, onko siirtoja jäljellä.
+     * 
+     * @param lauta kaksiulotteinen taulukko eli pelilauta
+     * @return true tai false
+     */
     public boolean siirtojaJaljella(String[][] lauta) {
         for (int i = 0; i < lauta.length; i++) {
             for (int j = 0; j < lauta.length; j++) {
@@ -83,6 +99,15 @@ public class Minimax {
         return false;
     }
 
+    /**
+     * Algoritmin ydin. Metodi kutsuu itseään rekursiivisesti ja selvittää laudan kaikki mahdolliset tulevat tilanteet.
+     * Laudan tilanteille annetaan arvo, pienemmällä rekursion syvyydellä on parempi arvo.
+     * 
+     * @param lauta kaksiulotteinen taulukko eli pelilauta
+     * @param syvyys rekursion syvyys
+     * @param maksimoija totuusarvo siitä, onko pelaaja maksimoija vai minimoija
+     * @return positiivinen arvo jos maksimoijan vuoro, negatiivinen arvo jos minimoijan.
+     */
     public int minimax(String[][] lauta, int syvyys, boolean maksimoija) {
 
         int arvo = laudanTulos(lauta);
@@ -133,6 +158,15 @@ public class Minimax {
 
     }
 
+    /**
+     * Metodi palauttaa parhaimman mahdollisen liikkeen.
+     * Jokainen tyhjä kohta käydään läpi ja kutsutaan minimax-algoritmia.
+     * "X" haluaa suurimman mahdollisen arvon, "O" pienimmän mahdollisen.
+     * 
+     * @param lauta kaksiulotteinen taulukko eli pelilauta
+     * @param merkki "X" tai "O" merkki
+     * @return parhaimman siirron koordinaatit
+     */
     public String parasLiike(String[][] lauta, String merkki) {
 
         int maksimi = -999;

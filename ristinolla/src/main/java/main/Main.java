@@ -18,8 +18,8 @@ public class Main {
             {"_", "_", "_"}};
 
         String[][] lauta2 = new String[][]{
-            {"X", "_", "X"},
-            {"_", "O", "_"},
+            {"_", "_", "X"},
+            {"_", "O", "X"},
             {"O", "_", "_"}};
         
         String[][] lauta3 = new String[][]{
@@ -28,13 +28,13 @@ public class Main {
             {"_", "X", "_", "X"},
             {"O", "_", "_", "O"}};
         
-        /*
+        
         System.out.println(minimax.parasLiike(lauta, "X"));
         System.out.println(minimax.parasLiike(lauta, "O"));
         System.out.println(minimax.parasLiike(lauta2, "X"));
-        pelilauta.tulostaLauta();
-        */
-        pelilauta.ihminenVsAi();
+
+        
+        //pelilauta.ihminenVsAi();
     }
 
 }
