@@ -9,7 +9,7 @@ public class Minimax {
      * Metodi käy läpi pelilaudan ja tarkistaa, onko peli päätynyt jommankumman voittoon.
      * 
      * @param lauta kaksiulotteinen taulukko eli pelilauta
-     * @return 1 jos "X" voittaa, -1 jos "O" voittaa, muuten 0
+     * @return 100 jos "X" voittaa, -100 jos "O" voittaa, muuten 0
      *  
      */
     public int laudanTulos(String[][] lauta) {
@@ -25,9 +25,9 @@ public class Minimax {
             }
             if (tarkistaja) {
                 if (lauta[rivi][0].equals("X")) {
-                    return 1;
+                    return 100;
                 } else if (lauta[rivi][0].equals("O")) {
-                    return -1;
+                    return -100;
                 } 
             }
         }
@@ -41,9 +41,9 @@ public class Minimax {
             }
             if (tarkistaja) {
                 if (lauta[0][sarake].equals("X")) {
-                    return 1;
+                    return 100;
                 } else if (lauta[0][sarake].equals("O")) {
-                    return -1;
+                    return -100;
                 } 
             }
         }
@@ -56,9 +56,9 @@ public class Minimax {
         }
         if (tarkistaja) {
             if (lauta[0][0].equals("X")) {
-                return 1;
+                return 100;
             } else if (lauta[0][0].equals("O")) {
-                return -1;
+                return -100;
             } 
         }
 
@@ -73,9 +73,9 @@ public class Minimax {
 
         if (tarkistaja) {
             if (lauta[lauta.length - 1][0].equals("X")) {
-                return 1;
+                return 100;
             } else if (lauta[lauta.length - 1][0].equals("O")) {
-                return -1;
+                return -100;
             } 
         }
 
@@ -112,7 +112,7 @@ public class Minimax {
 
         int arvo = laudanTulos(lauta);
 
-        if (arvo == 1 || arvo == -1) {
+        if (arvo == 100 || arvo == -100) {
             return arvo;
         }
 
