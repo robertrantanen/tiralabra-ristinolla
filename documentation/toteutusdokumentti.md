@@ -1,0 +1,3 @@
+## Ohjelman yleisrakenne
+
+Algoritmit, pelilaudan logiikka ja käyttöliittymä on yritetty erottaa toisistaan. Algoritmit-packagessa oleva Minimax-luokka hoitaa itse algoritmin toiminnan. Minimax-luokan laudanTulos-metodi tosin sivuaa myös pelilaudan logiikkaa, mutta päätin jättää metodin Minimax-luokkaan, sillä algoritmi tarvitsee sitä. Pelilauta-packagen Pelilauta-luokka hoitaa muun pelilaudan logiikan, kuten pelilaudan alustamisen tyhjillä merkeillä ja pelilaudan tulostamisen. Luokan konstruktori mahdollistaa suurempien pelilautojen luomisen. Main-packagen Kayttoliittyma-luokassa taas on nyt yksinkertainen tekstikäyttöliittymä, joka mahdollistaa pelaamisen tekoälyä vastaan.
