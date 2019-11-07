@@ -4,4 +4,10 @@
 
 [määrittelydokumentti](https://github.com/robertrantanen/tiralabra-ristinolla/blob/master/documentation/m%C3%A4%C3%A4rittelydokumentti.md)
 
+[toteutusdokumentti](https://github.com/robertrantanen/tiralabra-ristinolla/blob/master/documentation/toteutusdokumentti.md)
+
+[testausdokumentti](https://github.com/robertrantanen/tiralabra-ristinolla/blob/master/documentation/testausdokumentti.md)
+
 [viikkoraportti 1](https://github.com/robertrantanen/tiralabra-ristinolla/blob/master/documentation/viikkoraportit/viikkoraportti1.md)
+
+[viikkoraportti 2](https://github.com/robertrantanen/tiralabra-ristinolla/blob/master/documentation/viikkoraportit/viikkoraportti2.md)
