@@ -1,6 +1,8 @@
 package pelilauta;
 
-
+/**
+ * Luokka vastaa pelilaudan logiikasta
+ */
 public class Pelilauta {
 
     private String[][] lauta;
@@ -26,6 +28,9 @@ public class Pelilauta {
         this.lauta = lauta;
     }
 
+    /**
+     * Metodi tulostaa pelilaudan tilanteen
+     */
     public void tulostaLauta() {
         int l = this.lauta.length;
 
@@ -37,6 +42,13 @@ public class Pelilauta {
         }
     }
 
+    /**
+     * Metodi lisää merkin pelilaudan tietylle riville ja sarakkeelle
+     * 
+     * @param merkki "X" tai "O"
+     * @param rivi kaksiulotteisen taulukon eli pelilaudan rivi
+     * @param sarake kaksiulotteisen taulukon eli pelilaudan sarake
+     */
     public void lisaaMerkki(String merkki, int rivi, int sarake) {
         this.lauta[rivi][sarake] = merkki;
     }
