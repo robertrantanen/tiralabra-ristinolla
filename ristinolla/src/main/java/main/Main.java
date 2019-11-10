@@ -27,18 +27,18 @@ public class Main {
             {"_", "X", "O"}};
 
         String[][] lauta4 = new String[][]{
-            {"X", "X", "_", "_"},
-            {"O", "_", "_", "_"},
             {"X", "_", "_", "_"},
-            {"O", "O", "_", "_"}};
+            {"O", "_", "_", "_"},
+            {"_", "_", "_", "_"},
+            {"_", "_", "_", "_"}};
         
 
-        //long aika1 = System.currentTimeMillis();
-        //System.out.println(minimax.parasLiike(lauta4, "X"));
-        //long aika2 = System.currentTimeMillis();
-        //System.out.println("kului " + (aika2 - aika1) + " millisekuntia");
+        long aika1 = System.currentTimeMillis();
+        System.out.println(minimax.parasLiike(lauta4, "X"));
+        long aika2 = System.currentTimeMillis();
+        System.out.println("kului " + (aika2 - aika1) + " millisekuntia");
 
-        ka.ihminenVsAi();
+        //ka.ihminenVsAi();
     }
 
 }

@@ -6,11 +6,12 @@ package algoritmit;
 public class Minimax {
 
     /**
-     * Metodi käy läpi pelilaudan ja tarkistaa, onko peli päätynyt jommankumman voittoon.
-     * 
+     * Metodi käy läpi pelilaudan ja tarkistaa, onko peli päätynyt jommankumman
+     * voittoon.
+     *
      * @param lauta kaksiulotteinen taulukko eli pelilauta
      * @return 100 jos "X" voittaa, -100 jos "O" voittaa, muuten 0
-     *  
+     *
      */
     public int laudanTulos(String[][] lauta) {
 
@@ -28,7 +29,7 @@ public class Minimax {
                     return 100;
                 } else if (lauta[rivi][0].equals("O")) {
                     return -100;
-                } 
+                }
             }
         }
 
@@ -44,7 +45,7 @@ public class Minimax {
                     return 100;
                 } else if (lauta[0][sarake].equals("O")) {
                     return -100;
-                } 
+                }
             }
         }
 
@@ -59,7 +60,7 @@ public class Minimax {
                 return 100;
             } else if (lauta[0][0].equals("O")) {
                 return -100;
-            } 
+            }
         }
 
         tarkistaja = true;
@@ -76,15 +77,15 @@ public class Minimax {
                 return 100;
             } else if (lauta[lauta.length - 1][0].equals("O")) {
                 return -100;
-            } 
+            }
         }
 
         return 0;
     }
-    
+
     /**
      * Metodi käy pelilaudan läpi ja tarkistaa, onko siirtoja jäljellä.
-     * 
+     *
      * @param lauta kaksiulotteinen taulukko eli pelilauta
      * @return true tai false
      */
@@ -100,20 +101,22 @@ public class Minimax {
     }
 
     /**
-     * Algoritmin ydin. Metodi kutsuu itseään rekursiivisesti ja selvittää laudan kaikki mahdolliset tulevat tilanteet.
-     * Laudan tilanteille annetaan arvo, pienemmällä rekursion syvyydellä on parempi arvo.
-     * 
+     * Algoritmin ydin. Metodi kutsuu itseään rekursiivisesti ja selvittää
+     * laudan kaikki mahdolliset tulevat tilanteet. Laudan tilanteille annetaan
+     * arvo, pienemmällä rekursion syvyydellä on parempi arvo.
+     *
      * @param lauta kaksiulotteinen taulukko eli pelilauta
      * @param syvyys rekursion syvyys
      * @param maksimoija totuusarvo siitä, onko pelaaja maksimoija vai minimoija
-     * @return positiivinen arvo jos maksimoijan vuoro, negatiivinen arvo jos minimoijan.
+     * @return positiivinen arvo jos maksimoijan vuoro, negatiivinen arvo jos
+     * minimoijan.
      */
-    public int minimax(String[][] lauta, int syvyys, boolean maksimoija) {
+    public int minimax(String[][] lauta, int syvyys, boolean maksimoija, int alpha, int beta) {
 
-        int arvo = laudanTulos(lauta);
+        int tulos = laudanTulos(lauta);
 
-        if (arvo == 100 || arvo == -100) {
-            return arvo;
+        if (tulos == 100 || tulos == -100) {
+            return tulos;
         }
 
         if (!siirtojaJaljella(lauta)) {
@@ -121,7 +124,7 @@ public class Minimax {
         }
 
         if (maksimoija) {
-            int paras = -100;
+            int paras = Integer.MIN_VALUE;
 
             for (int i = 0; i < lauta.length; i++) {
                 for (int j = 0; j < lauta.length; j++) {
@@ -130,15 +133,23 @@ public class Minimax {
 
                         lauta[i][j] = "X";
 
-                        paras = Math.max(paras, minimax(lauta, syvyys + 1, !maksimoija));
+                        int arvo = minimax(lauta, syvyys + 1, !maksimoija, alpha, beta);
 
                         lauta[i][j] = "_";
+
+                        paras = Math.max(paras, arvo);
+
+                        alpha = Math.max(alpha, paras);
+
+                        if (beta <= alpha) {
+                            return paras - syvyys;
+                        }
                     }
                 }
             }
             return paras - syvyys;
         } else {
-            int paras = 100;
+            int paras = Integer.MAX_VALUE;
 
             for (int i = 0; i < lauta.length; i++) {
                 for (int j = 0; j < lauta.length; j++) {
@@ -147,9 +158,17 @@ public class Minimax {
 
                         lauta[i][j] = "O";
 
-                        paras = Math.min(paras, minimax(lauta, syvyys + 1, !maksimoija));
+                        int arvo = minimax(lauta, syvyys + 1, !maksimoija, alpha, beta);
 
                         lauta[i][j] = "_";
+
+                        paras = Math.min(paras, arvo);
+
+                        beta = Math.min(beta, paras);
+
+                        if (beta <= alpha) {
+                            return paras + syvyys;
+                        }
                     }
                 }
             }
@@ -159,18 +178,18 @@ public class Minimax {
     }
 
     /**
-     * Metodi palauttaa parhaimman mahdollisen liikkeen.
-     * Jokainen tyhjä kohta käydään läpi ja kutsutaan minimax-algoritmia.
-     * "X" haluaa suurimman mahdollisen arvon, "O" pienimmän mahdollisen.
-     * 
+     * Metodi palauttaa parhaimman mahdollisen liikkeen. Jokainen tyhjä kohta
+     * käydään läpi ja kutsutaan minimax-algoritmia. "X" haluaa suurimman
+     * mahdollisen arvon, "O" pienimmän mahdollisen.
+     *
      * @param lauta kaksiulotteinen taulukko eli pelilauta
      * @param merkki "X" tai "O" merkki
      * @return parhaimman siirron koordinaatit
      */
     public String parasLiike(String[][] lauta, String merkki) {
 
-        int maksimi = -999;
-        int minimi = 999;
+        int maksimi = Integer.MIN_VALUE;
+        int minimi = Integer.MAX_VALUE;
         int rivi = -1;
         int sarake = -1;
 
@@ -183,7 +202,7 @@ public class Minimax {
 
                         lauta[i][j] = "X";
 
-                        int arvo = minimax(lauta, 0, false);
+                        int arvo = minimax(lauta, 0, false, Integer.MIN_VALUE, Integer.MAX_VALUE);
 
                         lauta[i][j] = "_";
 
@@ -204,7 +223,7 @@ public class Minimax {
 
                         lauta[i][j] = "O";
 
-                        int arvo = minimax(lauta, 0, true);
+                        int arvo = minimax(lauta, 0, true, Integer.MIN_VALUE, Integer.MAX_VALUE);
 
                         lauta[i][j] = "_";
 
