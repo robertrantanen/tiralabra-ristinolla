@@ -33,12 +33,14 @@ public class Main {
             {"_", "_", "_", "_"}};
         
 
-        long aika1 = System.currentTimeMillis();
-        System.out.println(minimax.parasLiike(lauta4, "X"));
-        long aika2 = System.currentTimeMillis();
-        System.out.println("kului " + (aika2 - aika1) + " millisekuntia");
+//        long aika1 = System.currentTimeMillis();
+//        System.out.println(minimax.parasLiike(lauta4, "X"));
+//        long aika2 = System.currentTimeMillis();
+//        System.out.println("kului " + (aika2 - aika1) + " millisekuntia");
 
         //ka.ihminenVsAi();
+        
+        ka.aiVsAi();
     }
 
 }

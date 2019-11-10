@@ -103,4 +103,58 @@ public class Kayttoliittyma {
 
     }
 
+    public void aiVsAi() {
+        rivi = (int) (Math.random() * this.pelilauta.getLauta().length);
+        sarake = (int) (Math.random() * this.pelilauta.getLauta().length);
+        pelilauta.lisaaMerkki("X", rivi, sarake);
+        pelilauta.tulostaLauta();
+        System.out.println("");
+        long aika1 = System.currentTimeMillis();
+        while (true) {
+            String siirto = minimax.parasLiike(this.pelilauta.getLauta(), "O");
+            String[] palat = siirto.split(" ");
+            rivi = Integer.valueOf(palat[0]);
+            sarake = Integer.valueOf(palat[1]);
+            this.pelilauta.lisaaMerkki("O", rivi, sarake);
+            
+            pelilauta.tulostaLauta();
+            System.out.println("");
+
+            if (!minimax.siirtojaJaljella(this.pelilauta.getLauta())) {
+                System.out.println("Tasapeli");
+                break;
+            }
+
+            if (minimax.laudanTulos(pelilauta.getLauta()) == -100) {
+                System.out.println("O voitti");
+                break;
+            }
+            
+
+            siirto = minimax.parasLiike(this.pelilauta.getLauta(), "X");
+            palat = siirto.split(" ");
+            rivi = Integer.valueOf(palat[0]);
+            sarake = Integer.valueOf(palat[1]);
+            this.pelilauta.lisaaMerkki("X", rivi, sarake);
+            
+            pelilauta.tulostaLauta();
+            System.out.println("");
+
+            if (minimax.laudanTulos(pelilauta.getLauta()) == 100) {
+                System.out.println("X voitti");
+                break;
+            }
+
+            if (!minimax.siirtojaJaljella(this.pelilauta.getLauta())) {
+                System.out.println("Tasapeli");
+                break;
+            }
+        }
+        long aika2 = System.currentTimeMillis();
+        
+        System.out.println("");
+        
+        System.out.println("kului " + (aika2 - aika1) + " millisekuntia");
+    }
+
 }
