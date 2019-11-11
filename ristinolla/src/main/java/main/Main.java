@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
 
         Minimax minimax = new Minimax();
-        Pelilauta pelilauta = new Pelilauta(3);
+        Pelilauta pelilauta = new Pelilauta(5);
         Kayttoliittyma ka = new Kayttoliittyma();
 
         String[][] lauta = new String[][]{
@@ -29,8 +29,10 @@ public class Main {
         String[][] lauta4 = new String[][]{
             {"X", "_", "_", "_"},
             {"O", "_", "_", "_"},
-            {"_", "_", "_", "_"},
-            {"_", "_", "_", "_"}};
+            {"X", "_", "_", "_"},
+            {"O", "_", "_", "_"}};
+        
+        //System.out.println(minimax.parasLiike(lauta, "X"));
         
 
 //        long aika1 = System.currentTimeMillis();
@@ -39,7 +41,7 @@ public class Main {
 //        System.out.println("kului " + (aika2 - aika1) + " millisekuntia");
 
         //ka.ihminenVsAi();
-        
+        ka.setPelilauta(pelilauta);
         ka.aiVsAi();
     }
 

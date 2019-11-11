@@ -115,16 +115,16 @@ public class Minimax {
 
         int tulos = laudanTulos(lauta);
 
-        if (tulos == 100 || tulos == -100) {
+        if (tulos == 100 || tulos == -100 || syvyys == 0) {
             return tulos;
         }
-
+        
         if (!siirtojaJaljella(lauta)) {
             return 0;
         }
 
         if (maksimoija) {
-            int paras = Integer.MIN_VALUE;
+            int paras = -100;
 
             for (int i = 0; i < lauta.length; i++) {
                 for (int j = 0; j < lauta.length; j++) {
@@ -133,7 +133,7 @@ public class Minimax {
 
                         lauta[i][j] = "X";
 
-                        int arvo = minimax(lauta, syvyys + 1, !maksimoija, alpha, beta);
+                        int arvo = minimax(lauta, syvyys - 1, !maksimoija, alpha, beta);
 
                         lauta[i][j] = "_";
 
@@ -142,14 +142,14 @@ public class Minimax {
                         alpha = Math.max(alpha, paras);
 
                         if (beta <= alpha) {
-                            return paras - syvyys;
+                            return paras + syvyys;
                         }
                     }
                 }
             }
-            return paras - syvyys;
+            return paras + syvyys;
         } else {
-            int paras = Integer.MAX_VALUE;
+            int paras = 100;
 
             for (int i = 0; i < lauta.length; i++) {
                 for (int j = 0; j < lauta.length; j++) {
@@ -158,7 +158,7 @@ public class Minimax {
 
                         lauta[i][j] = "O";
 
-                        int arvo = minimax(lauta, syvyys + 1, !maksimoija, alpha, beta);
+                        int arvo = minimax(lauta, syvyys - 1, !maksimoija, alpha, beta);
 
                         lauta[i][j] = "_";
 
@@ -167,12 +167,12 @@ public class Minimax {
                         beta = Math.min(beta, paras);
 
                         if (beta <= alpha) {
-                            return paras + syvyys;
+                            return paras - syvyys;
                         }
                     }
                 }
             }
-            return paras + syvyys;
+            return paras - syvyys;
         }
 
     }
@@ -188,8 +188,8 @@ public class Minimax {
      */
     public String parasLiike(String[][] lauta, String merkki) {
 
-        int maksimi = Integer.MIN_VALUE;
-        int minimi = Integer.MAX_VALUE;
+        int maksimi = -100;
+        int minimi = 100;
         int rivi = -1;
         int sarake = -1;
 
@@ -202,7 +202,7 @@ public class Minimax {
 
                         lauta[i][j] = "X";
 
-                        int arvo = minimax(lauta, 0, false, Integer.MIN_VALUE, Integer.MAX_VALUE);
+                        int arvo = minimax(lauta, 4, false, Integer.MIN_VALUE, Integer.MAX_VALUE);
 
                         lauta[i][j] = "_";
 
@@ -223,7 +223,7 @@ public class Minimax {
 
                         lauta[i][j] = "O";
 
-                        int arvo = minimax(lauta, 0, true, Integer.MIN_VALUE, Integer.MAX_VALUE);
+                        int arvo = minimax(lauta, 4, true, Integer.MIN_VALUE, Integer.MAX_VALUE);
 
                         lauta[i][j] = "_";
 

@@ -16,7 +16,7 @@ public class minimaxTest {
     public minimaxTest() {
         lauta = new String[][]{
             {"X", "X", "_"},
-            {"O", "_", "O"},
+            {"O", "O", "_"},
             {"X", "O", "_"}};
         lauta2 = new String[][]{
             {"_", "_", "X"},
@@ -48,7 +48,7 @@ public class minimaxTest {
 
     @Test
     public void parasLiikeOMerkilla() {
-        assertEquals("1 1", minimax.parasLiike(lauta, "O"));
+        assertEquals("1 2", minimax.parasLiike(lauta, "O"));
     }
 
     @Test
