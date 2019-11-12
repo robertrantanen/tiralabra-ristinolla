@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
 
         Minimax minimax = new Minimax();
-        Pelilauta pelilauta = new Pelilauta(5);
+        Pelilauta pelilauta = new Pelilauta(10);
         Kayttoliittyma ka = new Kayttoliittyma();
 
         String[][] lauta = new String[][]{

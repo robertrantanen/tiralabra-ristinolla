@@ -118,7 +118,7 @@ public class Minimax {
         if (tulos == 100 || tulos == -100 || syvyys == 0) {
             return tulos;
         }
-        
+
         if (!siirtojaJaljella(lauta)) {
             return 0;
         }
@@ -188,10 +188,12 @@ public class Minimax {
      */
     public String parasLiike(String[][] lauta, String merkki) {
 
-        int maksimi = -100;
-        int minimi = 100;
+        int maksimi = -1000;
+        int minimi = 1000;
         int rivi = -1;
         int sarake = -1;
+
+        int syvyys = aloitusSyvyys(lauta);
 
         if (merkki.equals("X")) {
 
@@ -202,7 +204,7 @@ public class Minimax {
 
                         lauta[i][j] = "X";
 
-                        int arvo = minimax(lauta, 4, false, Integer.MIN_VALUE, Integer.MAX_VALUE);
+                        int arvo = minimax(lauta, syvyys, false, Integer.MIN_VALUE, Integer.MAX_VALUE);
 
                         lauta[i][j] = "_";
 
@@ -223,7 +225,7 @@ public class Minimax {
 
                         lauta[i][j] = "O";
 
-                        int arvo = minimax(lauta, 4, true, Integer.MIN_VALUE, Integer.MAX_VALUE);
+                        int arvo = minimax(lauta, syvyys, true, Integer.MIN_VALUE, Integer.MAX_VALUE);
 
                         lauta[i][j] = "_";
 
@@ -237,6 +239,50 @@ public class Minimax {
             }
         }
         return rivi + " " + sarake;
-
     }
+
+    private int tyhjiaJaljella(String[][] lauta) {
+        int tyhjia = 0;
+        for (int i = 0; i < lauta.length; i++) {
+            for (int j = 0; j < lauta.length; j++) {
+                if (lauta[i][j].equals("_")) {
+                    tyhjia++;
+                }
+            }
+        }
+        return tyhjia;
+    }
+
+    private int aloitusSyvyys(String[][] lauta) {
+        int koko = lauta.length * lauta.length;
+
+        if (koko <= 9) {
+            return 10;
+        }
+
+        int tyhjia = tyhjiaJaljella(lauta);
+
+        if (tyhjia > 30) {
+            return 0;
+        }
+
+        if (tyhjia > 25) {
+            return 1;
+        }
+
+        if (tyhjia > 20) {
+            return 2;
+        }
+
+        if (tyhjia > 15) {
+            return 3;
+        }
+
+        if (tyhjia > 10) {
+            return 4;
+        }
+
+        return 5;
+    }
+
 }
