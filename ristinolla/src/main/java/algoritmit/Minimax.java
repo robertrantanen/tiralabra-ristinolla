@@ -241,7 +241,7 @@ public class Minimax {
         return rivi + " " + sarake;
     }
 
-    private int tyhjiaJaljella(String[][] lauta) {
+    public int tyhjiaJaljella(String[][] lauta) {
         int tyhjia = 0;
         for (int i = 0; i < lauta.length; i++) {
             for (int j = 0; j < lauta.length; j++) {
@@ -253,7 +253,7 @@ public class Minimax {
         return tyhjia;
     }
 
-    private int aloitusSyvyys(String[][] lauta) {
+    public int aloitusSyvyys(String[][] lauta) {
         int koko = lauta.length * lauta.length;
 
         if (koko <= 9) {
@@ -262,11 +262,11 @@ public class Minimax {
 
         int tyhjia = tyhjiaJaljella(lauta);
 
-        if (tyhjia > 30) {
+        if (tyhjia > 40) {
             return 0;
         }
 
-        if (tyhjia > 25) {
+        if (tyhjia > 30) {
             return 1;
         }
 
@@ -281,8 +281,12 @@ public class Minimax {
         if (tyhjia > 10) {
             return 4;
         }
-
-        return 5;
+        
+        if (tyhjia > 5) {
+            return 5;
+        }
+        
+        return 6;
     }
 
 }

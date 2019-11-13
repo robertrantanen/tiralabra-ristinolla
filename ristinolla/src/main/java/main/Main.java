@@ -41,8 +41,8 @@ public class Main {
 //        System.out.println("kului " + (aika2 - aika1) + " millisekuntia");
 
         //ka.ihminenVsAi();
-        ka.setPelilauta(pelilauta);
-        ka.aiVsAi();
+       // ka.setPelilauta(pelilauta);
+        ka.aloita();
     }
 
 }

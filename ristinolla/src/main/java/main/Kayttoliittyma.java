@@ -24,6 +24,33 @@ public class Kayttoliittyma {
         this.pelilauta = pelilauta;
     }
 
+    public void aloita() {
+        System.out.println("Syötä numero:");
+        System.out.println("1 - ihminen vs tekoäly");
+        System.out.println("2 - tekoäly vs tekoäly");
+        System.out.println("3 - lopeta");
+        System.out.println("");
+        while (true) {
+            System.out.print("Syöte: ");
+            String syote = lukija.nextLine();
+            if (syote.equals("1")) {
+                setPelilauta(new Pelilauta(3));
+                ihminenVsAi();
+                break;
+            } else if (syote.equals("2")) {
+                System.out.print("Minkä kokoinen lauta? ");
+                String pituus = lukija.nextLine();
+                setPelilauta(new Pelilauta(Integer.valueOf(pituus)));
+                aiVsAi();
+                break;
+            } else if (syote.equals("3")) {
+                break;
+            } else {
+                System.out.println("virheellinen syöte");
+            }
+        }
+    }
+
     public void ihminenVsAi() {
         System.out.println("Ristinolla");
         System.out.println("");
@@ -65,6 +92,8 @@ public class Kayttoliittyma {
             } else if (siirto.equals("9")) {
                 rivi = 2;
                 sarake = 2;
+            } else {
+                System.out.println("virheellinen syöte");
             }
 
             if (this.pelilauta.getLauta()[rivi][sarake].equals("O")) {
@@ -100,6 +129,8 @@ public class Kayttoliittyma {
                 break;
             }
         }
+        
+        aloita();
 
     }
 
@@ -116,7 +147,7 @@ public class Kayttoliittyma {
             rivi = Integer.valueOf(palat[0]);
             sarake = Integer.valueOf(palat[1]);
             this.pelilauta.lisaaMerkki("O", rivi, sarake);
-            
+
             pelilauta.tulostaLauta();
             System.out.println("");
 
@@ -129,14 +160,13 @@ public class Kayttoliittyma {
                 System.out.println("O voitti");
                 break;
             }
-            
 
             siirto = minimax.parasLiike(this.pelilauta.getLauta(), "X");
             palat = siirto.split(" ");
             rivi = Integer.valueOf(palat[0]);
             sarake = Integer.valueOf(palat[1]);
             this.pelilauta.lisaaMerkki("X", rivi, sarake);
-            
+
             pelilauta.tulostaLauta();
             System.out.println("");
 
@@ -151,10 +181,13 @@ public class Kayttoliittyma {
             }
         }
         long aika2 = System.currentTimeMillis();
-        
+
+        System.out.println("");
+
+        System.out.println("aikaa kului " + (aika2 - aika1) + " millisekuntia");
         System.out.println("");
         
-        System.out.println("kului " + (aika2 - aika1) + " millisekuntia");
+        aloita();
     }
 
 }
