@@ -65,11 +65,6 @@ public class minimaxTest {
     }
 
     @Test
-    public void siirtojaJaljellaTesti() {
-        assertEquals(true, minimax.siirtojaJaljella(lauta));
-    }
-
-    @Test
     public void tyhjiaJaljellaTesti() {
         assertEquals(5, minimax.tyhjiaJaljella(lauta2));
     }

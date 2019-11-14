@@ -83,22 +83,6 @@ public class Minimax {
         return 0;
     }
 
-    /**
-     * Metodi käy pelilaudan läpi ja tarkistaa, onko siirtoja jäljellä.
-     *
-     * @param lauta kaksiulotteinen taulukko eli pelilauta
-     * @return true tai false
-     */
-    public boolean siirtojaJaljella(String[][] lauta) {
-        for (int i = 0; i < lauta.length; i++) {
-            for (int j = 0; j < lauta.length; j++) {
-                if (lauta[i][j].equals("_")) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
 
     /**
      * Algoritmin ydin. Metodi kutsuu itseään rekursiivisesti ja selvittää
@@ -121,7 +105,7 @@ public class Minimax {
             return tulos;
         }
 
-        if (!siirtojaJaljella(lauta)) {
+        if (tyhjiaJaljella(lauta) == 0) {
             return 0;
         }
 
@@ -273,10 +257,6 @@ public class Minimax {
         }
 
         int tyhjia = tyhjiaJaljella(lauta);
-
-        if (tyhjia > 40) {
-            return 0;
-        }
 
         if (tyhjia > 30) {
             return 1;

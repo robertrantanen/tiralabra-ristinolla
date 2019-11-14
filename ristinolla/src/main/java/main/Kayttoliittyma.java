@@ -110,7 +110,7 @@ public class Kayttoliittyma {
                 break;
             }
 
-            if (!minimax.siirtojaJaljella(this.pelilauta.getLauta())) {
+            if (minimax.tyhjiaJaljella(this.pelilauta.getLauta()) == 0) {
                 System.out.println("Tasapeli");
                 break;
             }
@@ -151,7 +151,7 @@ public class Kayttoliittyma {
             pelilauta.tulostaLauta();
             System.out.println("");
 
-            if (!minimax.siirtojaJaljella(this.pelilauta.getLauta())) {
+            if (minimax.tyhjiaJaljella(this.pelilauta.getLauta()) == 0) {
                 System.out.println("Tasapeli");
                 break;
             }
@@ -175,7 +175,7 @@ public class Kayttoliittyma {
                 break;
             }
 
-            if (!minimax.siirtojaJaljella(this.pelilauta.getLauta())) {
+            if (minimax.tyhjiaJaljella(this.pelilauta.getLauta()) == 0) {
                 System.out.println("Tasapeli");
                 break;
             }
