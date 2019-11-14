@@ -6,6 +6,6 @@ JUnit-testeillä on testattu algoritmin yleistä toimivuutta, että se esim. val
 * 4x4: noin 250 millisekuntia
 * 5x5: noin 500 millisekuntia
 * 6x6: noin 700 millisekuntia
-* 10x10: noin 1.5 sekuntia
-* 15x15: noin 3.5 sekuntia
-* 20x20: noin 6 sekuntia
+* 10x10: noin 1.7 sekuntia
+* 15x15: noin 8 sekuntia
+* 20x20: yli 30 sekuntia
