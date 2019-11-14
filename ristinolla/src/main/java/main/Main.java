@@ -21,11 +21,6 @@ public class Main {
             {"_", "O", "X"},
             {"O", "_", "_"}};
 
-        String[][] lauta3 = new String[][]{
-            {"X", "O", "X"},
-            {"O", "O", "X"},
-            {"_", "X", "O"}};
-
         String[][] lauta4 = new String[][]{
             {"X", "_", "_", "_"},
             {"O", "_", "_", "_"},
@@ -41,7 +36,6 @@ public class Main {
 //        System.out.println("kului " + (aika2 - aika1) + " millisekuntia");
 
         //ka.ihminenVsAi();
-       // ka.setPelilauta(pelilauta);
         ka.aloita();
     }
 

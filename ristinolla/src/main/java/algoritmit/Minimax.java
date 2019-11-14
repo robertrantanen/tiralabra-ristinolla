@@ -108,6 +108,8 @@ public class Minimax {
      * @param lauta kaksiulotteinen taulukko eli pelilauta
      * @param syvyys rekursion syvyys
      * @param maksimoija totuusarvo siitä, onko pelaaja maksimoija vai minimoija
+     * @param alpha optimointimenetelmä
+     * @param beta optimointimenetelmä
      * @return positiivinen arvo jos maksimoijan vuoro, negatiivinen arvo jos
      * minimoijan.
      */
@@ -241,6 +243,11 @@ public class Minimax {
         return rivi + " " + sarake;
     }
 
+    /**
+     * Metodi käy läpi pelilaudan ja selvittää tyhjien ruutujen määrän
+     * @param lauta kaksiulotteinen taulukko eli pelilauta
+     * @return tyhjien ruutujen määrä
+     */
     public int tyhjiaJaljella(String[][] lauta) {
         int tyhjia = 0;
         for (int i = 0; i < lauta.length; i++) {
@@ -253,10 +260,15 @@ public class Minimax {
         return tyhjia;
     }
 
+    /**
+     * Metodi selvittää tarpeeksi tehokkaan aloitussyvyyden minimax-algoritmille
+     * @param lauta kaksiulotteinen taulukko eli pelilauta
+     * @return 3x3-laudalla kaikki tilanteet kattava syvyys, isommilla laudoilla pienempi syvyys
+     */
     public int aloitusSyvyys(String[][] lauta) {
         int koko = lauta.length * lauta.length;
 
-        if (koko <= 9) {
+        if (koko == 9) {
             return 10;
         }
 
