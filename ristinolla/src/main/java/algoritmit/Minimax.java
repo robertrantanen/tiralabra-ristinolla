@@ -4,6 +4,23 @@ package algoritmit;
  * Luokka minimax-algoritmin toteutukseen
  */
 public class Minimax {
+    
+    private int voittorivi;
+    private String edellinenMerkki;
+    private int edellinenRivi;
+    private int edellinenSarake;
+
+    public Minimax() {
+        this.voittorivi = 3;
+        this.edellinenMerkki = "_";
+        this.edellinenRivi = -1;
+        this.edellinenSarake = -1;
+    }
+
+    public void setVoittorivi(int voittorivi) {
+        this.voittorivi = voittorivi;
+    }
+     
 
     /**
      * Metodi käy läpi pelilaudan ja tarkistaa, onko peli päätynyt jommankumman

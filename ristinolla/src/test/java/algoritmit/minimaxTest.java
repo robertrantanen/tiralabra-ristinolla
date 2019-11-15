@@ -12,7 +12,9 @@ public class minimaxTest {
 
     private String[][] lauta;
     private String[][] lauta2;
-    private Pelilauta lauta3;
+    private String[][] lauta3;
+    private String[][] lauta4;
+    private Pelilauta lauta5;
     private Minimax minimax;
 
     public minimaxTest() {
@@ -24,7 +26,15 @@ public class minimaxTest {
             {"_", "_", "X"},
             {"_", "O", "X"},
             {"O", "_", "_"}};
-        lauta3 = new Pelilauta(5);
+        lauta3 = new String[][]{
+            {"X", "_", "O"},
+            {"_", "O", "X"},
+            {"O", "_", "X"}};
+        lauta4 = new String[][]{
+            {"X", "O", "O"},
+            {"_", "X", "X"},
+            {"O", "_", "X"}};
+        lauta5 = new Pelilauta(5);
         minimax = new Minimax();
     }
 
@@ -65,6 +75,16 @@ public class minimaxTest {
     }
 
     @Test
+    public void laudanTulosTesti2() {
+        assertEquals(-100, minimax.laudanTulos(lauta3));
+    }
+
+    @Test
+    public void laudanTulosTesti3() {
+        assertEquals(100, minimax.laudanTulos(lauta4));
+    }
+
+    @Test
     public void tyhjiaJaljellaTesti() {
         assertEquals(5, minimax.tyhjiaJaljella(lauta2));
     }
@@ -76,7 +96,7 @@ public class minimaxTest {
 
     @Test
     public void aloitusSyvyysIsollaLaudalla() {
-        assertEquals(2, minimax.aloitusSyvyys(lauta3.getLauta()));
+        assertEquals(2, minimax.aloitusSyvyys(lauta5.getLauta()));
     }
 
 }
