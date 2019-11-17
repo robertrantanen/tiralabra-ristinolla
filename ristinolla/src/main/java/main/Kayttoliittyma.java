@@ -105,7 +105,7 @@ public class Kayttoliittyma {
             pelilauta.tulostaLauta();
             System.out.println("");
 
-            if (minimax.laudanTulos(pelilauta.getLauta()) == 100) {
+            if (minimax.laudanTulos(pelilauta.getLauta(), "X", rivi, sarake) == 100) {
                 System.out.println("Sinä voitit");
                 break;
             }
@@ -124,7 +124,7 @@ public class Kayttoliittyma {
             pelilauta.tulostaLauta();
             System.out.println("");
 
-            if (minimax.laudanTulos(pelilauta.getLauta()) == -100) {
+            if (minimax.laudanTulos(pelilauta.getLauta(), "O", rivi, sarake) == -100) {
                 System.out.println("Tietokone voitti");
                 break;
             }
@@ -156,7 +156,7 @@ public class Kayttoliittyma {
                 break;
             }
 
-            if (minimax.laudanTulos(pelilauta.getLauta()) == -100) {
+            if (minimax.laudanTulos(pelilauta.getLauta(), "O", rivi, sarake) == -100) {
                 System.out.println("O voitti");
                 break;
             }
@@ -170,7 +170,7 @@ public class Kayttoliittyma {
             pelilauta.tulostaLauta();
             System.out.println("");
 
-            if (minimax.laudanTulos(pelilauta.getLauta()) == 100) {
+            if (minimax.laudanTulos(pelilauta.getLauta(), "X", rivi, sarake) == 100) {
                 System.out.println("X voitti");
                 break;
             }

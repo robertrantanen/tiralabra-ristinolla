@@ -4,23 +4,22 @@ package algoritmit;
  * Luokka minimax-algoritmin toteutukseen
  */
 public class Minimax {
-    
+
     private int voittorivi;
-    private String edellinenMerkki;
     private int edellinenRivi;
     private int edellinenSarake;
+    private String edellinenMerkki;
 
     public Minimax() {
         this.voittorivi = 3;
-        this.edellinenMerkki = "_";
         this.edellinenRivi = -1;
         this.edellinenSarake = -1;
+        this.edellinenMerkki = "_";
     }
 
     public void setVoittorivi(int voittorivi) {
         this.voittorivi = voittorivi;
     }
-     
 
     /**
      * Metodi käy läpi pelilaudan ja tarkistaa, onko peli päätynyt jommankumman
@@ -30,76 +29,143 @@ public class Minimax {
      * @return 100 jos "X" voittaa, -100 jos "O" voittaa, muuten 0
      *
      */
-    public int laudanTulos(String[][] lauta) {
-
-        boolean tarkistaja;
-
-        for (int rivi = 0; rivi < lauta.length; rivi++) {
-            tarkistaja = true;
-            for (int sarake = 0; sarake < lauta.length - 1; sarake++) {
-                if (!(lauta[rivi][sarake].equals(lauta[rivi][sarake + 1]))) {
-                    tarkistaja = false;
-                }
-            }
-            if (tarkistaja) {
-                if (lauta[rivi][0].equals("X")) {
-                    return 100;
-                } else if (lauta[rivi][0].equals("O")) {
-                    return -100;
-                }
-            }
+    public int laudanTulos(String[][] lauta, String merkki, int i, int j) {
+        if (i == - 1) {
+            return 0;
         }
 
-        for (int sarake = 0; sarake < lauta.length; sarake++) {
-            tarkistaja = true;
-            for (int rivi = 0; rivi < lauta.length - 1; rivi++) {
-                if (!(lauta[rivi][sarake].equals(lauta[rivi + 1][sarake]))) {
-                    tarkistaja = false;
-                }
-            }
-            if (tarkistaja) {
-                if (lauta[0][sarake].equals("X")) {
-                    return 100;
-                } else if (lauta[0][sarake].equals("O")) {
-                    return -100;
-                }
-            }
-        }
+        int rivi = i;
+        int merkkeja = 1;
 
-        tarkistaja = true;
-        for (int i = 0; i < lauta.length - 1; i++) {
-            if (!(lauta[i][i].equals(lauta[i + 1][i + 1]))) {
-                tarkistaja = false;
+        for (int sarake = j; sarake < lauta.length - 1; sarake++) {
+            if (lauta[rivi][sarake].equals(lauta[rivi][sarake + 1])) {
+                merkkeja++;
+            } else {
+                break;
             }
         }
-        if (tarkistaja) {
-            if (lauta[0][0].equals("X")) {
+        for (int sarake = j; sarake > 0; sarake--) {
+            if (lauta[rivi][sarake].equals(lauta[rivi][sarake - 1])) {
+                merkkeja++;
+            } else {
+                break;
+            }
+        }
+        if (merkkeja == this.voittorivi) {
+            if (merkki.equals("X")) {
                 return 100;
-            } else if (lauta[0][0].equals("O")) {
+            } else if (merkki.equals("O")) {
                 return -100;
             }
         }
 
-        tarkistaja = true;
-        int sarake = 0;
-        for (int rivi = lauta.length - 1; rivi > 0; rivi--) {
-            if (!(lauta[rivi][sarake].equals(lauta[rivi - 1][sarake + 1]))) {
-                tarkistaja = false;
+        int sarake = j;
+        rivi = i;
+        merkkeja = 1;
+
+        for (; rivi < lauta.length - 1; rivi++) {
+            if (lauta[rivi][sarake].equals(lauta[rivi + 1][sarake])) {
+                merkkeja++;
+            } else {
+                break;
+            }
+        }
+        rivi = i;
+        for (; rivi > 0; rivi--) {
+            if (lauta[rivi][sarake].equals(lauta[rivi - 1][sarake])) {
+                merkkeja++;
+            } else {
+                break;
+            }
+        }
+        if (merkkeja == this.voittorivi) {
+            if (merkki.equals("X")) {
+                return 100;
+            } else if (merkki.equals("O")) {
+                return -100;
+            }
+        }
+
+        merkkeja = 1;
+        rivi = i;
+        sarake = j;
+
+        for (; rivi < lauta.length - 1; rivi++) {
+            if (sarake == lauta.length - 1) {
+                break;
+            }
+            if (lauta[rivi][sarake].equals(lauta[rivi + 1][sarake + 1])) {
+                merkkeja++;
+            } else {
+                break;
             }
             sarake++;
         }
 
-        if (tarkistaja) {
-            if (lauta[lauta.length - 1][0].equals("X")) {
+        rivi = i;
+        sarake = j;
+
+        for (; rivi > 0; rivi--) {
+            if (sarake == 0) {
+                break;
+            }
+            if (lauta[rivi][sarake].equals(lauta[rivi - 1][sarake - 1])) {
+                merkkeja++;
+            } else {
+                break;
+            }
+            sarake--;
+        }
+        if (merkkeja == this.voittorivi) {
+            if (merkki.equals("X")) {
                 return 100;
-            } else if (lauta[lauta.length - 1][0].equals("O")) {
+            } else if (merkki.equals("O")) {
+                return -100;
+            }
+        }
+
+        merkkeja = 1;
+
+        rivi = i;
+        sarake = j;
+
+        for (; rivi > 0; rivi--) {
+            if (sarake == lauta.length - 1) {
+                break;
+            }
+            if (lauta[rivi][sarake].equals(lauta[rivi - 1][sarake + 1])) {
+                merkkeja++;
+            } else {
+                break;
+            }
+            sarake++;
+        }
+
+        rivi = i;
+        sarake = j;
+
+        for (; rivi < lauta.length - 1; rivi++) {
+            if (sarake == 0) {
+                break;
+            }
+            if (lauta[rivi][sarake].equals(lauta[rivi + 1][sarake - 1])) {
+                merkkeja++;
+            } else {
+                break;
+            }
+            sarake--;
+        }
+
+        if (merkkeja == this.voittorivi) {
+            if (merkki.equals("X")) {
+                return 100;
+            } else if (merkki.equals("O")) {
                 return -100;
             }
         }
 
         return 0;
     }
-
 
     /**
      * Algoritmin ydin. Metodi kutsuu itseään rekursiivisesti ja selvittää
@@ -116,7 +182,7 @@ public class Minimax {
      */
     public int minimax(String[][] lauta, int syvyys, boolean maksimoija, int alpha, int beta) {
 
-        int tulos = laudanTulos(lauta);
+        int tulos = laudanTulos(lauta, edellinenMerkki, edellinenRivi, edellinenSarake);
 
         if (tulos == 100 || tulos == -100 || syvyys == 0) {
             return tulos;
@@ -127,7 +193,7 @@ public class Minimax {
         }
 
         if (maksimoija) {
-            int paras = -100;
+            int paras = -1000;
 
             for (int i = 0; i < lauta.length; i++) {
                 for (int j = 0; j < lauta.length; j++) {
@@ -135,6 +201,10 @@ public class Minimax {
                     if (lauta[i][j].equals("_")) {
 
                         lauta[i][j] = "X";
+
+                        this.edellinenRivi = i;
+                        this.edellinenSarake = j;
+                        this.edellinenMerkki = "X";
 
                         int arvo = minimax(lauta, syvyys - 1, !maksimoija, alpha, beta);
 
@@ -152,7 +222,7 @@ public class Minimax {
             }
             return paras + syvyys;
         } else {
-            int paras = 100;
+            int paras = 1000;
 
             for (int i = 0; i < lauta.length; i++) {
                 for (int j = 0; j < lauta.length; j++) {
@@ -160,6 +230,10 @@ public class Minimax {
                     if (lauta[i][j].equals("_")) {
 
                         lauta[i][j] = "O";
+
+                        this.edellinenRivi = i;
+                        this.edellinenSarake = j;
+                        this.edellinenMerkki = "O";
 
                         int arvo = minimax(lauta, syvyys - 1, !maksimoija, alpha, beta);
 
@@ -207,6 +281,10 @@ public class Minimax {
 
                         lauta[i][j] = "X";
 
+                        this.edellinenRivi = i;
+                        this.edellinenSarake = j;
+                        this.edellinenMerkki = "X";
+
                         int arvo = minimax(lauta, syvyys, false, Integer.MIN_VALUE, Integer.MAX_VALUE);
 
                         lauta[i][j] = "_";
@@ -228,6 +306,10 @@ public class Minimax {
 
                         lauta[i][j] = "O";
 
+                        this.edellinenRivi = i;
+                        this.edellinenSarake = j;
+                        this.edellinenMerkki = "O";
+
                         int arvo = minimax(lauta, syvyys, true, Integer.MIN_VALUE, Integer.MAX_VALUE);
 
                         lauta[i][j] = "_";
@@ -246,6 +328,7 @@ public class Minimax {
 
     /**
      * Metodi käy läpi pelilaudan ja selvittää tyhjien ruutujen määrän
+     *
      * @param lauta kaksiulotteinen taulukko eli pelilauta
      * @return tyhjien ruutujen määrä
      */
@@ -263,8 +346,10 @@ public class Minimax {
 
     /**
      * Metodi selvittää tarpeeksi tehokkaan aloitussyvyyden minimax-algoritmille
+     *
      * @param lauta kaksiulotteinen taulukko eli pelilauta
-     * @return 3x3-laudalla kaikki tilanteet kattava syvyys, isommilla laudoilla pienempi syvyys
+     * @return 3x3-laudalla kaikki tilanteet kattava syvyys, isommilla laudoilla
+     * pienempi syvyys
      */
     public int aloitusSyvyys(String[][] lauta) {
         int koko = lauta.length * lauta.length;
@@ -290,11 +375,11 @@ public class Minimax {
         if (tyhjia > 10) {
             return 4;
         }
-        
+
         if (tyhjia > 5) {
             return 5;
         }
-        
+
         return 6;
     }
 
