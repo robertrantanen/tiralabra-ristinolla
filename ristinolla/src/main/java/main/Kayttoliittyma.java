@@ -35,12 +35,16 @@ public class Kayttoliittyma {
             String syote = lukija.nextLine();
             if (syote.equals("1")) {
                 setPelilauta(new Pelilauta(3));
+                minimax.setVoittorivi(3);
                 ihminenVsAi();
                 break;
             } else if (syote.equals("2")) {
                 System.out.print("Minkä kokoinen lauta? ");
                 String pituus = lukija.nextLine();
                 setPelilauta(new Pelilauta(Integer.valueOf(pituus)));
+                System.out.print("Minkä pituinen voittorivi? ");
+                pituus = lukija.nextLine();
+                minimax.setVoittorivi((Integer.valueOf(pituus)));
                 aiVsAi();
                 break;
             } else if (syote.equals("3")) {

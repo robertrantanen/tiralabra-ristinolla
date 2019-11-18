@@ -23,9 +23,9 @@ public class Main {
 
         String[][] lauta4 = new String[][]{
             {"_", "_", "_", "_","_"},
-            {"_", "_", "_", "X","_"},
+            {"_", "_", "_", "_","_"},
             {"_", "_", "X", "_","_"},
-            {"_", "X", "_", "_","_"},
+            {"_", "_", "_", "_","_"},
             {"_", "_", "_", "_","_"}};
         
         //System.out.println(minimax.parasLiike(lauta, "X"));
@@ -40,7 +40,7 @@ public class Main {
         ka.aloita();
 
         //System.out.println(minimax.laudanTulos(lauta2, "X", 0, 0));
-        //System.out.println(minimax.parasLiike(lauta, "X"));
+        //System.out.println(minimax.parasLiike(lauta4, "O"));
     }
 
 }

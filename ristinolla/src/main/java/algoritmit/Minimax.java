@@ -51,7 +51,7 @@ public class Minimax {
                 break;
             }
         }
-        if (merkkeja == this.voittorivi) {
+        if (merkkeja >= this.voittorivi) {
             if (merkki.equals("X")) {
                 return 100;
             } else if (merkki.equals("O")) {
@@ -78,7 +78,7 @@ public class Minimax {
                 break;
             }
         }
-        if (merkkeja == this.voittorivi) {
+        if (merkkeja >= this.voittorivi) {
             if (merkki.equals("X")) {
                 return 100;
             } else if (merkki.equals("O")) {
@@ -116,7 +116,7 @@ public class Minimax {
             }
             sarake--;
         }
-        if (merkkeja == this.voittorivi) {
+        if (merkkeja >= this.voittorivi) {
             if (merkki.equals("X")) {
                 return 100;
             } else if (merkki.equals("O")) {
@@ -156,7 +156,7 @@ public class Minimax {
             sarake--;
         }
 
-        if (merkkeja == this.voittorivi) {
+        if (merkkeja >= this.voittorivi) {
             if (merkki.equals("X")) {
                 return 100;
             } else if (merkki.equals("O")) {
@@ -205,11 +205,11 @@ public class Minimax {
                         this.edellinenRivi = i;
                         this.edellinenSarake = j;
                         this.edellinenMerkki = "X";
-
+                        
                         int arvo = minimax(lauta, syvyys - 1, !maksimoija, alpha, beta);
 
                         lauta[i][j] = "_";
-
+                        
                         paras = Math.max(paras, arvo);
 
                         alpha = Math.max(alpha, paras);
@@ -238,7 +238,7 @@ public class Minimax {
                         int arvo = minimax(lauta, syvyys - 1, !maksimoija, alpha, beta);
 
                         lauta[i][j] = "_";
-
+                        
                         paras = Math.min(paras, arvo);
 
                         beta = Math.min(beta, paras);
@@ -288,7 +288,7 @@ public class Minimax {
                         int arvo = minimax(lauta, syvyys, false, Integer.MIN_VALUE, Integer.MAX_VALUE);
 
                         lauta[i][j] = "_";
-
+                        
                         if (arvo > maksimi) {
                             rivi = i;
                             sarake = j;
@@ -313,7 +313,7 @@ public class Minimax {
                         int arvo = minimax(lauta, syvyys, true, Integer.MIN_VALUE, Integer.MAX_VALUE);
 
                         lauta[i][j] = "_";
-
+                       
                         if (arvo < minimi) {
                             rivi = i;
                             sarake = j;
