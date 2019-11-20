@@ -22,10 +22,13 @@ public class Minimax {
     }
 
     /**
-     * Metodi käy läpi pelilaudan ja tarkistaa, onko peli päätynyt jommankumman
-     * voittoon.
+     * Metodi käy läpi edellisen siirron läheisyyden ja tarkistaa,
+     * onko peli päätynyt voittoon.
      *
      * @param lauta kaksiulotteinen taulukko eli pelilauta
+     * @param merkki "X" tai "O"
+     * @param i rivi
+     * @param j sarake
      * @return 100 jos "X" voittaa, -100 jos "O" voittaa, muuten 0
      *
      */
@@ -35,22 +38,27 @@ public class Minimax {
         }
 
         int rivi = i;
+        int sarake = j;
         int merkkeja = 1;
 
-        for (int sarake = j; sarake < lauta.length - 1; sarake++) {
+        for (; sarake < lauta.length - 1; sarake++) {
             if (lauta[rivi][sarake].equals(lauta[rivi][sarake + 1])) {
                 merkkeja++;
             } else {
                 break;
             }
         }
-        for (int sarake = j; sarake > 0; sarake--) {
+        
+        sarake = j;
+        
+        for (; sarake > 0; sarake--) {
             if (lauta[rivi][sarake].equals(lauta[rivi][sarake - 1])) {
                 merkkeja++;
             } else {
                 break;
             }
         }
+        
         if (merkkeja >= this.voittorivi) {
             if (merkki.equals("X")) {
                 return 100;
@@ -59,8 +67,8 @@ public class Minimax {
             }
         }
 
-        int sarake = j;
         rivi = i;
+        sarake = j;
         merkkeja = 1;
 
         for (; rivi < lauta.length - 1; rivi++) {
@@ -70,7 +78,9 @@ public class Minimax {
                 break;
             }
         }
+        
         rivi = i;
+        
         for (; rivi > 0; rivi--) {
             if (lauta[rivi][sarake].equals(lauta[rivi - 1][sarake])) {
                 merkkeja++;
@@ -78,6 +88,7 @@ public class Minimax {
                 break;
             }
         }
+        
         if (merkkeja >= this.voittorivi) {
             if (merkki.equals("X")) {
                 return 100;
@@ -116,6 +127,7 @@ public class Minimax {
             }
             sarake--;
         }
+        
         if (merkkeja >= this.voittorivi) {
             if (merkki.equals("X")) {
                 return 100;
@@ -125,7 +137,6 @@ public class Minimax {
         }
 
         merkkeja = 1;
-
         rivi = i;
         sarake = j;
 
@@ -177,8 +188,8 @@ public class Minimax {
      * @param maksimoija totuusarvo siitä, onko pelaaja maksimoija vai minimoija
      * @param alpha optimointimenetelmä
      * @param beta optimointimenetelmä
-     * @return positiivinen arvo jos maksimoijan vuoro, negatiivinen arvo jos
-     * minimoijan.
+     * @return mahdollisimman suuri arvo jos maksimoijan vuoro, mahdollisiimman
+     * pieni jos minimoijan.
      */
     public int minimax(String[][] lauta, int syvyys, boolean maksimoija, int alpha, int beta) {
 
@@ -205,11 +216,11 @@ public class Minimax {
                         this.edellinenRivi = i;
                         this.edellinenSarake = j;
                         this.edellinenMerkki = "X";
-                        
+
                         int arvo = minimax(lauta, syvyys - 1, !maksimoija, alpha, beta);
 
                         lauta[i][j] = "_";
-                        
+
                         paras = Math.max(paras, arvo);
 
                         alpha = Math.max(alpha, paras);
@@ -238,7 +249,7 @@ public class Minimax {
                         int arvo = minimax(lauta, syvyys - 1, !maksimoija, alpha, beta);
 
                         lauta[i][j] = "_";
-                        
+
                         paras = Math.min(paras, arvo);
 
                         beta = Math.min(beta, paras);
@@ -285,10 +296,10 @@ public class Minimax {
                         this.edellinenSarake = j;
                         this.edellinenMerkki = "X";
 
-                        int arvo = minimax(lauta, syvyys, false, Integer.MIN_VALUE, Integer.MAX_VALUE);
+                        int arvo = minimax(lauta, syvyys, false, -1000, 1000);
 
                         lauta[i][j] = "_";
-                        
+
                         if (arvo > maksimi) {
                             rivi = i;
                             sarake = j;
@@ -310,10 +321,10 @@ public class Minimax {
                         this.edellinenSarake = j;
                         this.edellinenMerkki = "O";
 
-                        int arvo = minimax(lauta, syvyys, true, Integer.MIN_VALUE, Integer.MAX_VALUE);
+                        int arvo = minimax(lauta, syvyys, true, -1000, 1000);
 
                         lauta[i][j] = "_";
-                       
+
                         if (arvo < minimi) {
                             rivi = i;
                             sarake = j;
@@ -360,27 +371,31 @@ public class Minimax {
 
         int tyhjia = tyhjiaJaljella(lauta);
 
-        if (tyhjia > 30) {
+        if (tyhjia > 40) {
             return 1;
         }
 
-        if (tyhjia > 20) {
+        if (tyhjia > 30) {
             return 2;
         }
 
-        if (tyhjia > 15) {
+        if (tyhjia > 20) {
             return 3;
         }
 
-        if (tyhjia > 10) {
+        if (tyhjia > 15) {
             return 4;
         }
 
-        if (tyhjia > 5) {
+        if (tyhjia > 10) {
             return 5;
         }
 
-        return 6;
+        if (tyhjia > 5) {
+            return 6;
+        }
+
+        return 7;
     }
 
 }

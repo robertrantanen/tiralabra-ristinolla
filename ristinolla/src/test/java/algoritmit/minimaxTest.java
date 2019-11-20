@@ -1,9 +1,6 @@
 package algoritmit;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import pelilauta.Pelilauta;
@@ -14,10 +11,12 @@ public class minimaxTest {
     private String[][] lauta2;
     private String[][] lauta3;
     private String[][] lauta4;
-    private Pelilauta lauta5;
+    private String[][] lauta5;
+    private Pelilauta lauta6;
     private Minimax minimax;
 
-    public minimaxTest() {
+    @Before
+    public void setUp() {
         lauta = new String[][]{
             {"X", "X", "_"},
             {"O", "O", "_"},
@@ -34,24 +33,15 @@ public class minimaxTest {
             {"X", "O", "O"},
             {"_", "X", "X"},
             {"O", "_", "X"}};
-        lauta5 = new Pelilauta(5);
+        lauta5 = new String[][]{
+            {"_", "_", "_", "_", "_"},
+            {"_", "_", "_", "_", "O"},
+            {"_", "X", "X", "X", "O"},
+            {"_", "_", "O", "_", "_"},
+            {"_", "_", "_", "_", "_"}};
+        lauta6 = new Pelilauta(5);
         minimax = new Minimax();
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
+        minimax.setVoittorivi(3);
     }
 
     @Test
@@ -62,6 +52,12 @@ public class minimaxTest {
     @Test
     public void parasLiikeOMerkilla() {
         assertEquals("1 2", minimax.parasLiike(lauta, "O"));
+    }
+
+    @Test
+    public void parasLiikeIsollaLaudalla() {
+        minimax.setVoittorivi(4);
+        assertEquals("2 0", minimax.parasLiike(lauta5, "X"));
     }
 
     @Test
@@ -95,8 +91,8 @@ public class minimaxTest {
     }
 
     @Test
-    public void aloitusSyvyysIsollaLaudalla() {
-        assertEquals(2, minimax.aloitusSyvyys(lauta5.getLauta()));
+    public void aloitusSyvyysIsollaUudellaLaudalla() {
+        assertEquals(3, minimax.aloitusSyvyys(lauta6.getLauta()));
     }
 
 }
