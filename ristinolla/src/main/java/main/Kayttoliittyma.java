@@ -25,12 +25,14 @@ public class Kayttoliittyma {
     }
 
     public void aloita() {
-        System.out.println("Syötä numero:");
-        System.out.println("1 - ihminen vs tekoäly");
-        System.out.println("2 - tekoäly vs tekoäly");
-        System.out.println("3 - lopeta");
-        System.out.println("");
+
         while (true) {
+            System.out.println("Syötä numero:");
+            System.out.println("1 - ihminen vs tekoäly");
+            System.out.println("2 - tekoäly vs tekoäly");
+            System.out.println("3 - random vs tekoäly");
+            System.out.println("4 - lopeta");
+            System.out.println("");
             System.out.print("Syöte: ");
             String syote = lukija.nextLine();
             if (syote.equals("1")) {
@@ -43,14 +45,37 @@ public class Kayttoliittyma {
                 String pituus = lukija.nextLine();
                 setPelilauta(new Pelilauta(Integer.valueOf(pituus)));
                 System.out.print("Minkä pituinen voittorivi? ");
-                pituus = lukija.nextLine();
-                minimax.setVoittorivi((Integer.valueOf(pituus)));
-                aiVsAi();
-                break;
+                String pituus2 = lukija.nextLine();
+                minimax.setVoittorivi((Integer.valueOf(pituus2)));
+                if (Integer.valueOf(pituus) >= 2 && Integer.valueOf(pituus2) >= 2) {
+                    aiVsAi();
+                    break;
+                } else {
+                    System.out.println("");
+                    System.out.println("virheellinen syöte");
+                    System.out.println("");
+                }
             } else if (syote.equals("3")) {
+                System.out.print("Minkä kokoinen lauta? ");
+                String pituus = lukija.nextLine();
+                setPelilauta(new Pelilauta(Integer.valueOf(pituus)));
+                System.out.print("Minkä pituinen voittorivi? ");
+                String pituus2 = lukija.nextLine();
+                minimax.setVoittorivi((Integer.valueOf(pituus2)));
+                if (Integer.valueOf(pituus) >= 2 && Integer.valueOf(pituus2) >= 2) {
+                    randomVsAi();
+                    break;
+                } else {
+                    System.out.println("");
+                    System.out.println("virheellinen syöte");
+                    System.out.println("");
+                }
+            } else if (syote.equals("4")) {
                 break;
             } else {
+                System.out.println("");
                 System.out.println("virheellinen syöte");
+                System.out.println("");
             }
         }
     }
@@ -133,7 +158,7 @@ public class Kayttoliittyma {
                 break;
             }
         }
-        
+
         aloita();
 
     }
@@ -190,7 +215,65 @@ public class Kayttoliittyma {
 
         System.out.println("aikaa kului " + (aika2 - aika1) + " millisekuntia");
         System.out.println("");
-        
+
+        aloita();
+    }
+
+    public void randomVsAi() {
+        rivi = (int) (Math.random() * this.pelilauta.getLauta().length);
+        sarake = (int) (Math.random() * this.pelilauta.getLauta().length);
+        pelilauta.lisaaMerkki("X", rivi, sarake);
+        pelilauta.tulostaLauta();
+        System.out.println("");
+        long aika1 = System.currentTimeMillis();
+        while (true) {
+            String siirto = minimax.parasLiike(this.pelilauta.getLauta(), "O");
+            String[] palat = siirto.split(" ");
+            rivi = Integer.valueOf(palat[0]);
+            sarake = Integer.valueOf(palat[1]);
+            this.pelilauta.lisaaMerkki("O", rivi, sarake);
+
+            pelilauta.tulostaLauta();
+            System.out.println("");
+
+            if (minimax.tyhjiaJaljella(this.pelilauta.getLauta()) == 0) {
+                System.out.println("Tasapeli");
+                break;
+            }
+
+            if (minimax.laudanTulos(pelilauta.getLauta(), "O", rivi, sarake) == -100) {
+                System.out.println("Algoritmi voitti");
+                break;
+            }
+
+            while (true) {
+                rivi = (int) (Math.random() * this.pelilauta.getLauta().length);
+                sarake = (int) (Math.random() * this.pelilauta.getLauta().length);
+                if (pelilauta.getLauta()[rivi][sarake].equals("_")) {
+                    break;
+                }
+            }
+            pelilauta.lisaaMerkki("X", rivi, sarake);
+            pelilauta.tulostaLauta();
+            System.out.println("");
+
+            if (minimax.laudanTulos(pelilauta.getLauta(), "X", rivi, sarake) == 100) {
+                System.out.println("Random voitti");
+                break;
+            }
+
+            if (minimax.tyhjiaJaljella(this.pelilauta.getLauta()) == 0) {
+                System.out.println("Tasapeli");
+                break;
+            }
+        }
+        long aika2 = System.currentTimeMillis();
+
+        System.out.println("");
+
+        System.out.println("aikaa kului " + (aika2 - aika1) + " millisekuntia");
+        System.out.println("");
+
         aloita();
     }
 
