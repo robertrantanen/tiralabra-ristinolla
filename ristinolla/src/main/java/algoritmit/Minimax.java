@@ -22,8 +22,8 @@ public class Minimax {
     }
 
     /**
-     * Metodi käy läpi edellisen siirron läheisyyden ja tarkistaa,
-     * onko peli päätynyt voittoon.
+     * Metodi käy läpi edellisen siirron läheisyyden ja tarkistaa, onko peli
+     * päätynyt voittoon.
      *
      * @param lauta kaksiulotteinen taulukko eli pelilauta
      * @param merkki "X" tai "O"
@@ -33,7 +33,7 @@ public class Minimax {
      *
      */
     public int laudanTulos(String[][] lauta, String merkki, int i, int j) {
-        if (i == - 1) {
+        if (i == -1) {
             return 0;
         }
 
@@ -48,9 +48,9 @@ public class Minimax {
                 break;
             }
         }
-        
+
         sarake = j;
-        
+
         for (; sarake > 0; sarake--) {
             if (lauta[rivi][sarake].equals(lauta[rivi][sarake - 1])) {
                 merkkeja++;
@@ -58,7 +58,7 @@ public class Minimax {
                 break;
             }
         }
-        
+
         if (merkkeja >= this.voittorivi) {
             if (merkki.equals("X")) {
                 return 100;
@@ -78,9 +78,9 @@ public class Minimax {
                 break;
             }
         }
-        
+
         rivi = i;
-        
+
         for (; rivi > 0; rivi--) {
             if (lauta[rivi][sarake].equals(lauta[rivi - 1][sarake])) {
                 merkkeja++;
@@ -88,7 +88,7 @@ public class Minimax {
                 break;
             }
         }
-        
+
         if (merkkeja >= this.voittorivi) {
             if (merkki.equals("X")) {
                 return 100;
@@ -127,7 +127,7 @@ public class Minimax {
             }
             sarake--;
         }
-        
+
         if (merkkeja >= this.voittorivi) {
             if (merkki.equals("X")) {
                 return 100;
@@ -180,8 +180,8 @@ public class Minimax {
 
     /**
      * Algoritmin ydin. Metodi kutsuu itseään rekursiivisesti ja selvittää
-     * laudan kaikki mahdolliset tulevat tilanteet. Laudan tilanteille annetaan
-     * arvo, pienemmällä rekursion syvyydellä on parempi arvo.
+     * laudan mahdolliset tulevat tilanteet. Laudan tilanteille annetaan arvo,
+     * pienemmällä rekursion syvyydellä on parempi arvo.
      *
      * @param lauta kaksiulotteinen taulukko eli pelilauta
      * @param syvyys rekursion syvyys
@@ -199,7 +199,7 @@ public class Minimax {
             return tulos;
         }
 
-        if (tyhjiaJaljella(lauta) == 0) {
+        if (!siirtojaJaljella(lauta)) {
             return 0;
         }
 
@@ -221,9 +221,13 @@ public class Minimax {
 
                         lauta[i][j] = "_";
 
-                        paras = Math.max(paras, arvo);
+                        if (arvo > paras) {
+                            paras = arvo;
+                        }
 
-                        alpha = Math.max(alpha, paras);
+                        if (paras > alpha) {
+                            alpha = paras;
+                        }
 
                         if (beta <= alpha) {
                             return paras + syvyys;
@@ -250,9 +254,13 @@ public class Minimax {
 
                         lauta[i][j] = "_";
 
-                        paras = Math.min(paras, arvo);
+                        if (arvo < paras) {
+                            paras = arvo;
+                        }
 
-                        beta = Math.min(beta, paras);
+                        if (paras < beta) {
+                            beta = paras;
+                        }
 
                         if (beta <= alpha) {
                             return paras - syvyys;
@@ -353,6 +361,23 @@ public class Minimax {
             }
         }
         return tyhjia;
+    }
+
+    /**
+     * Marginaalisesti nopeampi tapa selvittää, onko siirtoja jäljellä
+     * 
+     * @param lauta pelilauta
+     * @return true jos siitoja jäljellä, muuten false
+     */
+    private boolean siirtojaJaljella(String[][] lauta) {
+        for (int i = 0; i < lauta.length; i++) {
+            for (int j = 0; j < lauta.length; j++) {
+                if (lauta[i][j].equals("_")) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
