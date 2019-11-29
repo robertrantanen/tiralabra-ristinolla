@@ -388,15 +388,18 @@ public class Minimax {
      * pienempi syvyys
      */
     public int aloitusSyvyys(String[][] lauta) {
-        int koko = lauta.length * lauta.length;
 
-        if (koko == 9) {
+        if (lauta.length == 3) {
             return 10;
         }
 
         int tyhjia = tyhjiaJaljella(lauta);
+        
+        if (tyhjia < this.voittorivi) {
+            return 1;
+        }
 
-        if (tyhjia > 40) {
+        if (tyhjia > 50) {
             return 1;
         }
 
