@@ -41,6 +41,7 @@ public class Minimax {
         int sarake = j;
         int merkkeja = 1;
 
+        // katsotaan oikealle ja vasemmalle
         for (; sarake < lauta.length - 1; sarake++) {
             if (lauta[rivi][sarake].equals(lauta[rivi][sarake + 1])) {
                 merkkeja++;
@@ -71,6 +72,7 @@ public class Minimax {
         sarake = j;
         merkkeja = 1;
 
+        // katsotaan ylös ja alas
         for (; rivi < lauta.length - 1; rivi++) {
             if (lauta[rivi][sarake].equals(lauta[rivi + 1][sarake])) {
                 merkkeja++;
@@ -101,6 +103,7 @@ public class Minimax {
         rivi = i;
         sarake = j;
 
+        // katsotaan diagonaali
         for (; rivi < lauta.length - 1; rivi++) {
             if (sarake == lauta.length - 1) {
                 break;
@@ -140,6 +143,7 @@ public class Minimax {
         rivi = i;
         sarake = j;
 
+        // katsotaan toinen diagonaali
         for (; rivi > 0; rivi--) {
             if (sarake == lauta.length - 1) {
                 break;
@@ -365,7 +369,7 @@ public class Minimax {
 
     /**
      * Marginaalisesti nopeampi tapa selvittää, onko siirtoja jäljellä
-     * 
+     *
      * @param lauta pelilauta
      * @return true jos siitoja jäljellä, muuten false
      */
@@ -394,9 +398,10 @@ public class Minimax {
         }
 
         int tyhjia = tyhjiaJaljella(lauta);
-        
+        int koko = lauta.length * lauta.length;
+
         if (tyhjia < this.voittorivi) {
-            return 1;
+            return 0;
         }
 
         if (tyhjia > 50) {

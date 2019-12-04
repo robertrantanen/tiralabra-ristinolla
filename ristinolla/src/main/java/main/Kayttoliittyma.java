@@ -92,44 +92,48 @@ public class Kayttoliittyma {
 
         while (true) {
 
-            System.out.print("Syöte: ");
-            String siirto = lukija.nextLine();
-            if (siirto.equals("1")) {
-                rivi = 0;
-                sarake = 0;
-            } else if (siirto.equals("2")) {
-                rivi = 0;
-                sarake = 1;
-            } else if (siirto.equals("3")) {
-                rivi = 0;
-                sarake = 2;
-            } else if (siirto.equals("4")) {
-                rivi = 1;
-                sarake = 0;
-            } else if (siirto.equals("5")) {
-                rivi = 1;
-                sarake = 1;
-            } else if (siirto.equals("6")) {
-                rivi = 1;
-                sarake = 2;
-            } else if (siirto.equals("7")) {
-                rivi = 2;
-                sarake = 0;
-            } else if (siirto.equals("8")) {
-                rivi = 2;
-                sarake = 1;
-            } else if (siirto.equals("9")) {
-                rivi = 2;
-                sarake = 2;
-            } else {
-                System.out.println("virheellinen syöte");
+            while (true) {
+                System.out.print("Syöte: ");
+                String siirto = lukija.nextLine();
+                if (siirto.equals("1")) {
+                    rivi = 0;
+                    sarake = 0;
+                } else if (siirto.equals("2")) {
+                    rivi = 0;
+                    sarake = 1;
+                } else if (siirto.equals("3")) {
+                    rivi = 0;
+                    sarake = 2;
+                } else if (siirto.equals("4")) {
+                    rivi = 1;
+                    sarake = 0;
+                } else if (siirto.equals("5")) {
+                    rivi = 1;
+                    sarake = 1;
+                } else if (siirto.equals("6")) {
+                    rivi = 1;
+                    sarake = 2;
+                } else if (siirto.equals("7")) {
+                    rivi = 2;
+                    sarake = 0;
+                } else if (siirto.equals("8")) {
+                    rivi = 2;
+                    sarake = 1;
+                } else if (siirto.equals("9")) {
+                    rivi = 2;
+                    sarake = 2;
+                } else {
+                    System.out.println("virheellinen syöte");
+                    continue;
+                }
+                if (!this.pelilauta.getLauta()[rivi][sarake].equals("_")) {
+                    System.out.println("virheellinen syöte");
+                } else {
+                    this.pelilauta.lisaaMerkki("X", rivi, sarake);
+                    break;
+                }
             }
 
-            if (this.pelilauta.getLauta()[rivi][sarake].equals("O")) {
-                System.out.println("Yritit huijata!");
-            } else {
-                this.pelilauta.lisaaMerkki("X", rivi, sarake);
-            }
             System.out.println("");
             pelilauta.tulostaLauta();
             System.out.println("");
@@ -144,7 +148,7 @@ public class Kayttoliittyma {
                 break;
             }
 
-            siirto = minimax.parasLiike(this.pelilauta.getLauta(), "O");
+            String siirto = minimax.parasLiike(this.pelilauta.getLauta(), "O");
             String[] palat = siirto.split(" ");
             rivi = Integer.valueOf(palat[0]);
             sarake = Integer.valueOf(palat[1]);
