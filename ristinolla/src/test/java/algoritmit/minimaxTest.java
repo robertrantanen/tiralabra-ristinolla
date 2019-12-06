@@ -12,6 +12,7 @@ public class minimaxTest {
     private String[][] lauta3;
     private String[][] lauta4;
     private String[][] lauta5;
+    private String[][] lautax;
     private Pelilauta lauta6;
     private Minimax minimax;
 
@@ -33,6 +34,10 @@ public class minimaxTest {
             {"X", "O", "O"},
             {"_", "X", "X"},
             {"O", "_", "X"}};
+        lautax = new String[][]{
+            {"X", "_", "_"},
+            {"_", "X", "X"},
+            {"_", "_", "O"}};
         lauta5 = new String[][]{
             {"_", "_", "_", "_", "_"},
             {"_", "_", "_", "_", "O"},
@@ -67,7 +72,7 @@ public class minimaxTest {
 
     @Test
     public void algoritmiEstaaHavion() {
-        assertEquals("1 0", minimax.parasLiike(lauta4, "O"));
+        assertEquals("1 0", minimax.parasLiike(lautax, "O"));
     }
 
     @Test
