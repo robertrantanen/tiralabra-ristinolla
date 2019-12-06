@@ -21,6 +21,10 @@ public class Minimax {
         this.voittorivi = voittorivi;
     }
 
+    public int getVoittorivi() {
+        return voittorivi;
+    }
+
     /**
      * Metodi käy läpi edellisen siirron läheisyyden ja tarkistaa, onko peli
      * päätynyt voittoon.
@@ -36,6 +40,8 @@ public class Minimax {
         if (i == -1) {
             return 0;
         }
+
+        int parasMerkkeja = 1;
 
         int rivi = i;
         int sarake = j;
@@ -60,12 +66,8 @@ public class Minimax {
             }
         }
 
-        if (merkkeja >= this.voittorivi) {
-            if (merkki.equals("X")) {
-                return 100;
-            } else if (merkki.equals("O")) {
-                return -100;
-            }
+        if (merkkeja > parasMerkkeja) {
+            parasMerkkeja = merkkeja;
         }
 
         rivi = i;
@@ -91,12 +93,8 @@ public class Minimax {
             }
         }
 
-        if (merkkeja >= this.voittorivi) {
-            if (merkki.equals("X")) {
-                return 100;
-            } else if (merkki.equals("O")) {
-                return -100;
-            }
+        if (merkkeja > parasMerkkeja) {
+            parasMerkkeja = merkkeja;
         }
 
         merkkeja = 1;
@@ -131,12 +129,8 @@ public class Minimax {
             sarake--;
         }
 
-        if (merkkeja >= this.voittorivi) {
-            if (merkki.equals("X")) {
-                return 100;
-            } else if (merkki.equals("O")) {
-                return -100;
-            }
+        if (merkkeja > parasMerkkeja) {
+            parasMerkkeja = merkkeja;
         }
 
         merkkeja = 1;
@@ -171,14 +165,15 @@ public class Minimax {
             sarake--;
         }
 
-        if (merkkeja >= this.voittorivi) {
-            if (merkki.equals("X")) {
-                return 100;
-            } else if (merkki.equals("O")) {
-                return -100;
-            }
+        if (merkkeja > parasMerkkeja) {
+            parasMerkkeja = merkkeja;
         }
 
+        if (merkki.equals("X")) {
+            return parasMerkkeja * 10;
+        } else if (merkki.equals("O")) {
+            return parasMerkkeja * -10;
+        }
         return 0;
     }
 
@@ -199,7 +194,7 @@ public class Minimax {
 
         int tulos = laudanTulos(lauta, edellinenMerkki, edellinenRivi, edellinenSarake);
 
-        if (tulos == 100 || tulos == -100 || syvyys == 0) {
+        if (tulos >= voittorivi * 10 || tulos <= voittorivi * -10 || syvyys == 0) {
             return tulos;
         }
 
@@ -208,7 +203,7 @@ public class Minimax {
         }
 
         if (maksimoija) {
-            int paras = -1000;
+            int paras = -1000000000;
 
             for (int i = 0; i < lauta.length; i++) {
                 for (int j = 0; j < lauta.length; j++) {
@@ -241,7 +236,7 @@ public class Minimax {
             }
             return paras + syvyys;
         } else {
-            int paras = 1000;
+            int paras = 1000000000;
 
             for (int i = 0; i < lauta.length; i++) {
                 for (int j = 0; j < lauta.length; j++) {
@@ -288,8 +283,8 @@ public class Minimax {
      */
     public String parasLiike(String[][] lauta, String merkki) {
 
-        int maksimi = -1000;
-        int minimi = 1000;
+        int maksimi = -1000000000;
+        int minimi = 1000000000;
         int rivi = -1;
         int sarake = -1;
 
@@ -308,7 +303,7 @@ public class Minimax {
                         this.edellinenSarake = j;
                         this.edellinenMerkki = "X";
 
-                        int arvo = minimax(lauta, syvyys, false, -1000, 1000);
+                        int arvo = minimax(lauta, syvyys, false, -1000000000, 1000000000);
 
                         lauta[i][j] = "_";
 
@@ -333,7 +328,7 @@ public class Minimax {
                         this.edellinenSarake = j;
                         this.edellinenMerkki = "O";
 
-                        int arvo = minimax(lauta, syvyys, true, -1000, 1000);
+                        int arvo = minimax(lauta, syvyys, true, -1000000000, 1000000000);
 
                         lauta[i][j] = "_";
 

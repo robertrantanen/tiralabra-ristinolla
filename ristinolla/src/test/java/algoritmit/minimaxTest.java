@@ -66,18 +66,23 @@ public class minimaxTest {
     }
 
     @Test
+    public void algoritmiEstaaHavion() {
+        assertEquals("1 0", minimax.parasLiike(lauta4, "O"));
+    }
+
+    @Test
     public void laudanTulosTesti() {
-        assertEquals(0, minimax.laudanTulos(lauta2, "O", 2, 0));
+        assertEquals(-20, minimax.laudanTulos(lauta2, "O", 2, 0));
     }
 
     @Test
     public void laudanTulosTesti2() {
-        assertEquals(-100, minimax.laudanTulos(lauta3, "O", 1, 1));
+        assertEquals(-30, minimax.laudanTulos(lauta3, "O", 1, 1));
     }
 
     @Test
     public void laudanTulosTesti3() {
-        assertEquals(100, minimax.laudanTulos(lauta4, "X", 2, 2));
+        assertEquals(30, minimax.laudanTulos(lauta4, "X", 2, 2));
     }
 
     @Test
