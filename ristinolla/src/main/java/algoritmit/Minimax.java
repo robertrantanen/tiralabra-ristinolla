@@ -398,7 +398,6 @@ public class Minimax {
         }
 
         int tyhjia = tyhjiaJaljella(lauta);
-        int koko = lauta.length * lauta.length;
 
         if (tyhjia < this.voittorivi) {
             return 0;
