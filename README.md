@@ -17,3 +17,5 @@
 [viikkoraportti 4](https://github.com/robertrantanen/tiralabra-ristinolla/blob/master/documentation/viikkoraportit/viikkoraportti4.md)
 
 [viikkoraportti 5](https://github.com/robertrantanen/tiralabra-ristinolla/blob/master/documentation/viikkoraportit/viikkoraportti5.md)
+
+[viikkoraportti 6](https://github.com/robertrantanen/tiralabra-ristinolla/blob/master/documentation/viikkoraportit/viikkoraportti6.md)
