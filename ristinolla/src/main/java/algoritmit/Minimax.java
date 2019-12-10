@@ -33,7 +33,7 @@ public class Minimax {
      * @param merkki "X" tai "O"
      * @param i rivi
      * @param j sarake
-     * @return 100 jos "X" voittaa, -100 jos "O" voittaa, muuten 0
+     * @return positiivinen arvo jos X:n vuoro, negatiivinen jos O:n vuoro
      *
      */
     public int laudanTulos(String[][] lauta, String merkki, int i, int j) {
@@ -394,8 +394,8 @@ public class Minimax {
 
         int tyhjia = tyhjiaJaljella(lauta);
 
-        if (tyhjia < this.voittorivi) {
-            return 0;
+        if (tyhjia < this.voittorivi - 1) {
+            return 1;
         }
 
         if (tyhjia > 50) {

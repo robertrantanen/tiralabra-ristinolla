@@ -184,13 +184,13 @@ public class Kayttoliittyma {
             pelilauta.tulostaLauta();
             System.out.println("");
 
-            if (minimax.tyhjiaJaljella(this.pelilauta.getLauta()) == 0) {
-                System.out.println("Tasapeli");
+            if (minimax.laudanTulos(pelilauta.getLauta(), "O", rivi, sarake) == minimax.getVoittorivi() * -10) {
+                System.out.println("O voitti");
                 break;
             }
 
-            if (minimax.laudanTulos(pelilauta.getLauta(), "O", rivi, sarake) == minimax.getVoittorivi() * -10) {
-                System.out.println("O voitti");
+            if (minimax.tyhjiaJaljella(this.pelilauta.getLauta()) == 0) {
+                System.out.println("Tasapeli");
                 break;
             }
 
@@ -240,13 +240,13 @@ public class Kayttoliittyma {
             pelilauta.tulostaLauta();
             System.out.println("");
 
-            if (minimax.tyhjiaJaljella(this.pelilauta.getLauta()) == 0) {
-                System.out.println("Tasapeli");
+            if (minimax.laudanTulos(pelilauta.getLauta(), "O", rivi, sarake) == minimax.getVoittorivi() * -10) {
+                System.out.println("Algoritmi voitti");
                 break;
             }
 
-            if (minimax.laudanTulos(pelilauta.getLauta(), "O", rivi, sarake) == minimax.getVoittorivi() * -10) {
-                System.out.println("Algoritmi voitti");
+            if (minimax.tyhjiaJaljella(this.pelilauta.getLauta()) == 0) {
+                System.out.println("Tasapeli");
                 break;
             }
 
