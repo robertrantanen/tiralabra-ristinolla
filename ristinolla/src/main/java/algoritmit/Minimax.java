@@ -394,7 +394,7 @@ public class Minimax {
 
         int tyhjia = tyhjiaJaljella(lauta);
 
-        if (tyhjia < this.voittorivi - 1) {
+        if (lauta.length >= 10 && tyhjia < this.voittorivi - 1) {
             return 1;
         }
 
