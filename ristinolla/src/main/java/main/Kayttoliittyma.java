@@ -186,24 +186,14 @@ public class Kayttoliittyma {
         System.out.println("");
         System.out.println("Ristinolla");
         System.out.println("");
-        System.out.println("Syötteet muotoa 'rivi sarake' esim. '0 0'");
+        System.out.println("Syötteet muotoa 'rivi sarake' esim. '0 1'");
         System.out.println("");
 
-        double random = Math.random();
-        if (random >= 0.5) {
-            System.out.println("algoritmi aloittaa");
-            System.out.println("");
-            rivi = (int) (Math.random() * this.pelilauta.getLauta().length);
-            sarake = (int) (Math.random() * this.pelilauta.getLauta().length);
-            pelilauta.lisaaMerkki("O", rivi, sarake);
-            pelilauta.tulostaLauta();
-            System.out.println("");
-        } else {
-            System.out.println("sinä aloitat");
-            System.out.println("");
-            pelilauta.tulostaLauta();
-            System.out.println("");
-        }
+        System.out.println("algoritmi aloittaa");
+        System.out.println("");
+        pelilauta.lisaaMerkki("O", 0, 0);
+        pelilauta.tulostaLauta();
+        System.out.println("");
 
         while (true) {
 

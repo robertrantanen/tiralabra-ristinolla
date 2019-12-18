@@ -77,7 +77,7 @@ public class minimaxTest {
 
     @Test
     public void laudanTulosTesti() {
-        assertEquals(-10, minimax.laudanTulos(lauta2, "O", 2, 0));
+        assertEquals(-20, minimax.laudanTulos(lauta2, "O", 1, 1));
     }
 
     @Test

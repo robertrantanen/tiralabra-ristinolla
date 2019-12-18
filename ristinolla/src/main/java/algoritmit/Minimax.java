@@ -33,8 +33,7 @@ public class Minimax {
      * @param merkki "X" tai "O"
      * @param i rivi
      * @param j sarake
-     * @return numeerinen arvo laudan tulokselle. Omien merkkien jonossa oleminen kasvattaa arvoa,
-     * vihollismerkkien lähellä oleminen vähentää arvoa
+     * @return positiivinen arvo jos X:n vuoro, negatiivinen jos O:n vuoro
      *
      */
     public int laudanTulos(String[][] lauta, String merkki, int i, int j) {
@@ -43,7 +42,6 @@ public class Minimax {
         }
 
         int parasMerkkeja = 1;
-        int vastakkaisiaMerkkeja = 0;
 
         int rivi = i;
         int sarake = j;
@@ -53,8 +51,6 @@ public class Minimax {
         for (; sarake < lauta.length - 1; sarake++) {
             if (lauta[rivi][sarake].equals(lauta[rivi][sarake + 1])) {
                 merkkeja++;
-            } else if (vastakkainenMerkki(lauta, merkki, rivi, sarake + 1)) {
-                vastakkaisiaMerkkeja++;
             } else {
                 break;
             }
@@ -65,8 +61,6 @@ public class Minimax {
         for (; sarake > 0; sarake--) {
             if (lauta[rivi][sarake].equals(lauta[rivi][sarake - 1])) {
                 merkkeja++;
-            } else if (vastakkainenMerkki(lauta, merkki, rivi, sarake - 1)) {
-                vastakkaisiaMerkkeja++;
             } else {
                 break;
             }
@@ -84,8 +78,6 @@ public class Minimax {
         for (; rivi < lauta.length - 1; rivi++) {
             if (lauta[rivi][sarake].equals(lauta[rivi + 1][sarake])) {
                 merkkeja++;
-            } else if (vastakkainenMerkki(lauta, merkki, rivi + 1, sarake)) {
-                vastakkaisiaMerkkeja++;
             } else {
                 break;
             }
@@ -96,8 +88,6 @@ public class Minimax {
         for (; rivi > 0; rivi--) {
             if (lauta[rivi][sarake].equals(lauta[rivi - 1][sarake])) {
                 merkkeja++;
-            } else if (vastakkainenMerkki(lauta, merkki, rivi - 1, sarake)) {
-                vastakkaisiaMerkkeja++;
             } else {
                 break;
             }
@@ -118,8 +108,6 @@ public class Minimax {
             }
             if (lauta[rivi][sarake].equals(lauta[rivi + 1][sarake + 1])) {
                 merkkeja++;
-            } else if (vastakkainenMerkki(lauta, merkki, rivi + 1, sarake + 1)) {
-                vastakkaisiaMerkkeja++;
             } else {
                 break;
             }
@@ -135,8 +123,6 @@ public class Minimax {
             }
             if (lauta[rivi][sarake].equals(lauta[rivi - 1][sarake - 1])) {
                 merkkeja++;
-            } else if (vastakkainenMerkki(lauta, merkki, rivi - 1, sarake - 1)) {
-                vastakkaisiaMerkkeja++;
             } else {
                 break;
             }
@@ -158,8 +144,6 @@ public class Minimax {
             }
             if (lauta[rivi][sarake].equals(lauta[rivi - 1][sarake + 1])) {
                 merkkeja++;
-            } else if (vastakkainenMerkki(lauta, merkki, rivi - 1, sarake + 1)) {
-                vastakkaisiaMerkkeja++;
             } else {
                 break;
             }
@@ -175,8 +159,6 @@ public class Minimax {
             }
             if (lauta[rivi][sarake].equals(lauta[rivi + 1][sarake - 1])) {
                 merkkeja++;
-            } else if (vastakkainenMerkki(lauta, merkki, rivi + 1, sarake - 1)) {
-                vastakkaisiaMerkkeja++;
             } else {
                 break;
             }
@@ -188,34 +170,17 @@ public class Minimax {
         }
 
         if (merkki.equals("X")) {
-            if (parasMerkkeja == voittorivi) {
+            if (parasMerkkeja >= voittorivi) {
                 return 1000000000;
-            } else {
-                return parasMerkkeja * 10 + vastakkaisiaMerkkeja * 10;
             }
-
+            return parasMerkkeja * 10;
         } else if (merkki.equals("O")) {
-            if (parasMerkkeja == voittorivi) {
+            if (parasMerkkeja >= voittorivi) {
                 return -1000000000;
-            } else {
-                return parasMerkkeja * -10 + vastakkaisiaMerkkeja * 10;
             }
+            return parasMerkkeja * -10;
         }
         return 0;
-    }
-
-    /**
-     * Apumetodi laudan tuloksen selvittämiseen.
-     */
-    private boolean vastakkainenMerkki(String[][] lauta, String merkki, int rivi, int sarake) {
-        String vastakkainen = "a";
-        if (merkki.equals("X")) {
-            vastakkainen = "O";
-        }
-        if (merkki.equals("O")) {
-            vastakkainen = "X";
-        }
-        return lauta[rivi][sarake].equals(vastakkainen);
     }
 
     /**
@@ -356,7 +321,6 @@ public class Minimax {
                     }
                 }
             }
-            System.out.println(maksimi);
         } else if (merkki.equals("O")) {
 
             for (int i = 0; i < lauta.length; i++) {
@@ -370,7 +334,7 @@ public class Minimax {
                         this.edellinenSarake = j;
                         this.edellinenMerkki = "O";
 
-                        int arvo = minimax(lauta, syvyys, true, -1000000000, 1000000000);
+                        int arvo = minimax(lauta, syvyys, true, Integer.MIN_VALUE, Integer.MAX_VALUE);
 
                         lauta[i][j] = "_";
 
@@ -382,7 +346,6 @@ public class Minimax {
                     }
                 }
             }
-            System.out.println(minimi);
         }
         return rivi + " " + sarake;
     }
