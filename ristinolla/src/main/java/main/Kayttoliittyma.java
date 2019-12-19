@@ -4,6 +4,9 @@ import algoritmit.Minimax;
 import java.util.Scanner;
 import pelilauta.Pelilauta;
 
+/**
+ * Luokka tekstikäyttöliittymälle
+ */
 public class Kayttoliittyma {
 
     private Pelilauta pelilauta;

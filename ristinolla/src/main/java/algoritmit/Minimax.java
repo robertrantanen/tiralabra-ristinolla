@@ -33,7 +33,7 @@ public class Minimax {
      * @param merkki "X" tai "O"
      * @param i rivi
      * @param j sarake
-     * @return positiivinen arvo jos X:n vuoro, negatiivinen jos O:n vuoro
+     * @return 1000000000 tai -1000000000 jos voittotilanne, muuten jonossa olevien merkkien määrä kertaa 10 tai -10
      *
      */
     public int laudanTulos(String[][] lauta, String merkki, int i, int j) {
@@ -191,8 +191,8 @@ public class Minimax {
      * @param lauta kaksiulotteinen taulukko eli pelilauta
      * @param syvyys rekursion syvyys
      * @param maksimoija totuusarvo siitä, onko pelaaja maksimoija vai minimoija
-     * @param alpha optimointimenetelmä
-     * @param beta optimointimenetelmä
+     * @param alpha optimointimenetelmä, paras mahdollinen X:n arvo
+     * @param beta optimointimenetelmä, paras mahdollinen O:n arvo
      * @return mahdollisimman suuri arvo jos maksimoijan vuoro, mahdollisiimman
      * pieni jos minimoijan.
      */
@@ -372,7 +372,7 @@ public class Minimax {
      * Marginaalisesti nopeampi tapa selvittää, onko siirtoja jäljellä
      *
      * @param lauta pelilauta
-     * @return true jos siitoja jäljellä, muuten false
+     * @return true jos siirtoja jäljellä, muuten false
      */
     private boolean siirtojaJaljella(String[][] lauta) {
         for (int i = 0; i < lauta.length; i++) {
