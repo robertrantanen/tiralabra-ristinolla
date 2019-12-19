@@ -8,6 +8,8 @@
 
 [testausdokumentti](https://github.com/robertrantanen/tiralabra-ristinolla/blob/master/documentation/testausdokumentti.md)
 
+[javadoc](https://robertrantanen.github.io/tiralabra-ristinolla/)
+
 [viikkoraportti 1](https://github.com/robertrantanen/tiralabra-ristinolla/blob/master/documentation/viikkoraportit/viikkoraportti1.md)
 
 [viikkoraportti 2](https://github.com/robertrantanen/tiralabra-ristinolla/blob/master/documentation/viikkoraportit/viikkoraportti2.md)
